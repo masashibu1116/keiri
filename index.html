@@ -1,0 +1,3628 @@
+<!DOCTYPE html>
+<!-- saved from url=(0072)file:///C:/Users/msint/Downloads/msinterior_system_v3_1763278910787.html -->
+<html lang="ja"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>エムズインテリア 経理管理システム v3.0</title>
+    <script src="./index_files/chart.js.ダウンロード"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Hiragino Kaku Gothic Pro', 'ヒラギノ角ゴ Pro W3', 'メイリオ', Meiryo, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(45deg, #2c3e50, #3498db);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .tabs {
+            display: flex;
+            background: #f8f9fa;
+            border-bottom: 3px solid #e9ecef;
+            overflow-x: auto;
+            flex-wrap: wrap;
+        }
+
+        .tab {
+            padding: 15px 20px;
+            background: #fff;
+            border: none;
+            border-right: 1px solid #e9ecef;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            color: #495057;
+            white-space: nowrap;
+            position: relative;
+            min-width: 120px;
+        }
+
+        .tab:hover {
+            background: #e9ecef;
+            transform: translateY(-2px);
+        }
+
+        .tab.active {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 3px 10px rgba(102, 126, 234, 0.3);
+        }
+
+        .tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+        }
+
+        .content {
+            padding: 30px;
+            min-height: 600px;
+            background: #fff;
+        }
+
+        .sheet {
+            display: none;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .sheet.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .form-col {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #495057;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: #fff;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            transform: translateY(-1px);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 16px;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            margin: 5px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .btn-success {
+            background: linear-gradient(45deg, #56ab2f, #a8e6cf);
+            color: white;
+        }
+
+        .btn-warning {
+            background: linear-gradient(45deg, #f093fb, #f5576c);
+            color: white;
+        }
+
+        .btn-danger {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+        }
+
+        .btn-info {
+            background: linear-gradient(45deg, #4facfe, #00f2fe);
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        th {
+            background: linear-gradient(45deg, #f8f9fa, #e9ecef);
+            font-weight: 600;
+            color: #495057;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        tr:hover {
+            background: #f8f9fa;
+        }
+
+        .status {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .status-not-invoiced {
+            background: #e9ecef;
+            color: #495057;
+        }
+
+        .status-unpaid {
+            background: #ffebee;
+            color: #c62828;
+        }
+
+        .status-partial {
+            background: #fff3e0;
+            color: #ef6c00;
+        }
+
+        .status-paid {
+            background: #e8f5e8;
+            color: #2e7d32;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .summary-card {
+            background: linear-gradient(135deg, #fff, #f8f9fa);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-left: 5px solid;
+            transition: transform 0.3s ease;
+        }
+
+        .summary-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .summary-card h3 {
+            margin-bottom: 15px;
+            color: #495057;
+            font-size: 1.1rem;
+        }
+
+        .summary-value {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .summary-card.primary { border-left-color: #667eea; }
+        .summary-card.success { border-left-color: #56ab2f; }
+        .summary-card.warning { border-left-color: #f093fb; }
+        .summary-card.danger { border-left-color: #ff6b6b; }
+
+        .summary-card.primary .summary-value { color: #667eea; }
+        .summary-card.success .summary-value { color: #56ab2f; }
+        .summary-card.warning .summary-value { color: #f093fb; }
+        .summary-card.danger .summary-value { color: #ff6b6b; }
+
+        .chart-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin: 20px 0;
+        }
+
+        .alert {
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            font-weight: 600;
+        }
+
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .alert-warning {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+
+        .alert-danger {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .payment-form {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 2px solid #e9ecef;
+        }
+
+        .aging-30 { background-color: #ffebee !important; }
+        .aging-15 { background-color: #fff3e0 !important; }
+        .aging-current { background-color: #e8f5e8 !important; }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .header {
+                padding: 20px;
+            }
+
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .content {
+                padding: 15px;
+            }
+
+            .form-row {
+                flex-direction: column;
+            }
+
+            .tabs {
+                flex-direction: column;
+            }
+
+            .tab {
+                min-width: auto;
+                text-align: center;
+            }
+
+            .summary-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .table-container {
+                font-size: 0.9rem;
+            }
+
+            th, td {
+                padding: 10px 5px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 1.5rem;
+            }
+
+            input, select, textarea, .btn {
+                font-size: 14px;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏠 エムズインテリア 経理管理システム</h1>
+            <p>工事管理・経費・請求書・入金管理を一元化</p>
+        </div>
+
+                <div class="tabs">
+            <button class="tab active" onclick="showSheet(&#39;construction&#39;)">🏗️ 工事台帳</button>
+            <button class="tab" onclick="showSheet(&#39;clients&#39;)">👥 顧客台帳</button>
+            <button class="tab" onclick="showSheet(&#39;suppliers&#39;)">🏢 仕入先台帳</button>
+            <button class="tab" onclick="showSheet(&#39;expenses&#39;)">💰 経費管理</button>
+            <button class="tab" onclick="showSheet(&#39;payables&#39;)">📋 買掛金管理</button>
+            <button class="tab" onclick="showSheet(&#39;invoices&#39;)">📋 請求書</button>
+            <button class="tab" onclick="showSheet(&#39;payments&#39;)">💳 入金記録</button>
+            <button class="tab" onclick="showSheet(&#39;receivables&#39;)">📊 売掛金管理</button>
+            <button class="tab" onclick="showSheet(&#39;cashflow&#39;)">💹 キャッシュフロー</button>
+            <button class="tab" onclick="showSheet(&#39;monthly&#39;)">📈 月次損益</button>
+            <button class="tab" onclick="showSheet(&#39;yearly&#39;)">📅 年次分析</button>
+            <button class="tab" onclick="showSheet(&#39;tax&#39;)">🧾 税務資料</button>
+            <button class="tab" onclick="showSheet(&#39;manual&#39;)">📖 使い方</button>
+        </div>
+        <div class="content">
+            <!-- 工事台帳 -->
+            <div id="construction-sheet" class="sheet active">
+                <h2>🏗️ 工事台帳管理</h2>
+
+                <div class="form-group">
+                    <div class="form-row">
+                        <div class="form-col">
+                            <label for="projectName">工事名 *</label>
+                            <input type="text" id="projectName" required="">
+                        </div>
+                        <div class="form-col">
+                            <label for="clientName">顧客名 *</label>
+                            <input type="text" id="clientName" required="">
+                        </div>
+                        <div class="form-col">
+                            <label for="projectDate">工事開始日</label>
+                            <input type="date" id="projectDate">
+                        </div>
+                        <div class="form-col">
+                            <label for="completionDate">完了予定日</label>
+                            <input type="date" id="completionDate">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-col">
+                            <label for="contractAmount">契約金額（円）</label>
+                            <input type="number" id="contractAmount" min="0">
+                        </div>
+                        <div class="form-col">
+                            <label for="projectStatus">工事状況</label>
+                            <select id="projectStatus">
+                                <option value="計画中">計画中</option>
+                                <option value="進行中">進行中</option>
+                                <option value="完了">完了</option>
+                                <option value="中断">中断</option>
+                            </select>
+                        </div>
+                        <div class="form-col">
+                            <label for="projectLocation">工事場所</label>
+                            <input type="text" id="projectLocation">
+                        </div>
+                        <div class="form-col">
+                            <label for="projectManager">担当者</label>
+                            <input type="text" id="projectManager">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="projectNotes">備考</label>
+                        <textarea id="projectNotes" placeholder="特記事項があれば記入してください"></textarea>
+                    </div>
+
+                    <button class="btn btn-primary" onclick="addProject()">工事を登録</button>
+                    <button class="btn btn-info" onclick="exportProjectsCSV()">CSV出力</button>
+                </div>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>工事名</th>
+                                <th>顧客名</th>
+                                <th>契約金額</th>
+                                <th>開始日</th>
+                                <th>完了予定</th>
+                                <th>状況</th>
+                                <th>入金状況</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="projectsTableBody">
+                    <tr>
+                        <td>田中様邸キッチンリフォーム</td>
+                        <td>田中太郎</td>
+                        <td>¥1,200,000</td>
+                        <td>2025-01-15</td>
+                        <td>2025-02-15</td>
+                        <td><span class="status status-進行中">進行中</span></td>
+                        <td><span class="status status-not-invoiced">未請求</span></td>
+                        <td>
+                            <button class="btn btn-warning btn-sm" onclick="editProject(&#39;PRJ-2025-001&#39;)">編集</button>
+                            <button class="btn btn-danger btn-sm" onclick="deleteProject(&#39;PRJ-2025-001&#39;)">削除</button>
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>山田商店事務所改装</td>
+                        <td>山田商店</td>
+                        <td>¥800,000</td>
+                        <td>2025-01-10</td>
+                        <td>2025-01-25</td>
+                        <td><span class="status status-完了">完了</span></td>
+                        <td><span class="status status-partial">一部入金</span></td>
+                        <td>
+                            <button class="btn btn-warning btn-sm" onclick="editProject(&#39;PRJ-2025-002&#39;)">編集</button>
+                            <button class="btn btn-danger btn-sm" onclick="deleteProject(&#39;PRJ-2025-002&#39;)">削除</button>
+                        </td>
+                    </tr>
+                </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+            <!-- 顧客台帳 -->
+            <div id="clients-sheet" class="sheet">
+                <h2>👥 顧客台帳管理</h2>
+
+                <div class="form-group">
+                    <div class="form-row">
+                        <div class="form-col">
+                            <label for="clientCode">顧客コード</label>
+                            <input type="text" id="clientCode" placeholder="自動生成">
+                        </div>
+                        <div class="form-col">
+                            <label for="clientRegName">顧客名 *</label>
+                            <input type="text" id="clientRegName" required="">
+                        </div>
+                        <div class="form-col">
+                            <label for="clientKana">フリガナ</label>
+                            <input type="text" id="clientKana">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-col">
+                            <label for="clientPostal">郵便番号</label>
+                            <input type="text" id="clientPostal" placeholder="000-0000">
+                        </div>
+                        <div class="form-col">
+                            <label for="clientAddress">住所</label>
+                            <input type="text" id="clientAddress">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-col">
+                            <label for="clientPhone">電話番号</label>
+                            <input type="tel" id="clientPhone">
+                        </div>
+                        <div class="form-col">
+                            <label for="clientEmail">メールアドレス</label>
+                            <input type="email" id="clientEmail">
+                        </div>
+                        <div class="form-col">
+                            <label for="clientContact">担当者名</label>
+                            <input type="text" id="clientContact">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-col">
+                            <label for="clientStartDate">取引開始日</label>
+                            <input type="date" id="clientStartDate">
+                        </div>
+                        <div class="form-col">
+                            <label for="clientCategory">顧客分類</label>
+                            <select id="clientCategory">
+                                <option value="個人">個人</option>
+                                <option value="法人">法人</option>
+                                <option value="不動産会社">不動産会社</option>
+                                <option value="建設会社">建設会社</option>
+                                <option value="その他">その他</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-col">
+                            <label for="clientNotes">備考</label>
+                            <textarea id="clientNotes" rows="3"></textarea>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary" onclick="addClient()">✅ 顧客を登録</button>
+                </div>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>顧客コード</th>
+                                <th>顧客名</th>
+                                <th>フリガナ</th>
+                                <th>電話番号</th>
+                                <th>メールアドレス</th>
+                                <th>住所</th>
+                                <th>担当者</th>
+                                <th>分類</th>
+                                <th>取引開始日</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="clientsTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 仕入先台帳 -->
+            <div id="suppliers-sheet" class="sheet">
+                <h2>🏢 仕入先台帳管理</h2>
+
+                <div class="form-group">
+                    <div class="form-row">
+                        <div class="form-col">
+                            <label for="supplierCode">仕入先コード</label>
+                            <input type="text" id="supplierCode" placeholder="自動生成">
+                        </div>
+                        <div class="form-col">
+                            <label for="supplierRegName">仕入先名 *</label>
+                            <input type="text" id="supplierRegName" required="">
+                        </div>
+                        <div class="form-col">
+                            <label for="supplierKana">フリガナ</label>
+                            <input type="text" id="supplierKana">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-col">
+                            <label for="supplierPostal">郵便番号</label>
+                            <input type="text" id="supplierPostal" placeholder="000-0000">
+                        </div>
+                        <div class="form-col">
+                            <label for="supplierAddress">住所</label>
+                            <input type="text" id="supplierAddress">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-col">
+                            <label for="supplierPhone">電話番号</label>
+                            <input type="tel" id="supplierPhone">
+                        </div>
+                        <div class="form-col">
+                            <label for="supplierEmail">メールアドレス</label>
+                            <input type="email" id="supplierEmail">
+                        </div>
+                        <div class="form-col">
+                            <label for="supplierContact">担当者名</label>
+                            <input type="text" id="supplierContact">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-col">
+                            <label for="supplierStartDate">取引開始日</label>
+                            <input type="date" id="supplierStartDate">
+                        </div>
+                        <div class="form-col">
+                            <label for="supplierCategory">仕入先分類</label>
+                            <select id="supplierCategory">
+                                <option value="材料業者">材料業者</option>
+                                <option value="外注業者">外注業者</option>
+                                <option value="設備業者">設備業者</option>
+                                <option value="運送業者">運送業者</option>
+                                <option value="その他">その他</option>
+                            </select>
+                        </div>
+                        <div class="form-col">
+                            <label for="supplierPaymentTerms">支払条件</label>
+                            <input type="text" id="supplierPaymentTerms" placeholder="例: 月末締め翌月末払い">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-col">
+                            <label for="supplierNotes">備考</label>
+                            <textarea id="supplierNotes" rows="3"></textarea>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary" onclick="addSupplier()">✅ 仕入先を登録</button>
+                </div>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>仕入先コード</th>
+                                <th>仕入先名</th>
+                                <th>フリガナ</th>
+                                <th>電話番号</th>
+                                <th>メールアドレス</th>
+                                <th>住所</th>
+                                <th>担当者</th>
+                                <th>分類</th>
+                                <th>支払条件</th>
+                                <th>取引開始日</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="suppliersTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 買掛金管理 -->
+            <div id="payables-sheet" class="sheet">
+                <h2>📋 買掛金管理</h2>
+
+                <div class="form-group">
+                    <h3>🆕 発注登録フォーム</h3>
+                    <div class="form-row">
+                        <div class="form-col">
+                            <label for="payableDate">発注日 *</label>
+                            <input type="date" id="payableDate" required="">
+                        </div>
+                        <div class="form-col">
+                            <label for="payableSupplier">仕入先 *</label>
+                            <select id="payableSupplier" required=""><option value="">-- 選択してください --</option></select>
+                        </div>
+                        <div class="form-col">
+                            <label for="payableProject">関連工事</label>
+                            <select id="payableProject"><option value="">-- 選択してください --</option><option value="PRJ-2025-001">田中様邸キッチンリフォーム</option><option value="PRJ-2025-002">山田商店事務所改装</option></select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-col">
+                            <label for="payableCategory">費目</label>
+                            <select id="payableCategory">
+                                <option value="材料費">材料費</option>
+                                <option value="外注費">外注費</option>
+                                <option value="設備費">設備費</option>
+                                <option value="運送費">運送費</option>
+                                <option value="その他">その他</option>
+                            </select>
+                        </div>
+                        <div class="form-col">
+                            <label for="payableAmount">発注金額（円） *</label>
+                            <input type="number" id="payableAmount" min="0" required="">
+                        </div>
+                        <div class="form-col">
+                            <label for="payableDueDate">支払予定日</label>
+                            <input type="date" id="payableDueDate">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-col">
+                            <label for="payableDescription">発注内容 *</label>
+                            <textarea id="payableDescription" rows="2" required=""></textarea>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary" onclick="addPayable()">✅ 発注を登録</button>
+                </div>
+
+                <h3>📋 買掛金一覧</h3>
+                <div class="summary-grid">
+                    <div class="summary-card danger">
+                        <h3>💰 未払い合計</h3>
+                        <div class="summary-value" id="totalUnpaidPayables">¥0</div>
+                    </div>
+                    <div class="summary-card warning">
+                        <h3>📊 一部支払い</h3>
+                        <div class="summary-value" id="totalPartialPayables">¥0</div>
+                    </div>
+                    <div class="summary-card success">
+                        <h3>✅ 支払い済み</h3>
+                        <div class="summary-value" id="totalPaidPayables">¥0</div>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>発注番号</th>
+                                <th>発注日</th>
+                                <th>仕入先</th>
+                                <th>関連工事</th>
+                                <th>費目</th>
+                                <th>発注金額</th>
+                                <th>支払済額</th>
+                                <th>残額</th>
+                                <th>支払状況</th>
+                                <th>支払予定日</th>
+                                <th>発注内容</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="payablesTableBody"></tbody>
+                    </table>
+                </div>
+
+                <h3>💳 支払い記録</h3>
+                <div class="form-group">
+                    <div class="form-row">
+                        <div class="form-col">
+                            <label for="payablePaymentId">発注番号 *</label>
+                            <select id="payablePaymentId" required=""><option value="">-- 選択してください --</option></select>
+                        </div>
+                        <div class="form-col">
+                            <label for="payablePaymentDate">支払日 *</label>
+                            <input type="date" id="payablePaymentDate" required="">
+                        </div>
+                        <div class="form-col">
+                            <label for="payablePaymentAmount">支払額（円） *</label>
+                            <input type="number" id="payablePaymentAmount" min="0" required="">
+                        </div>
+                        <div class="form-col">
+                            <label for="payablePaymentMethod">支払方法</label>
+                            <select id="payablePaymentMethod">
+                                <option value="銀行振込">銀行振込</option>
+                                <option value="現金">現金</option>
+                                <option value="クレジットカード">クレジットカード</option>
+                                <option value="手形">手形</option>
+                                <option value="その他">その他</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button class="btn btn-success" onclick="recordPayablePayment()">💳 支払いを記録</button>
+                </div>
+
+                <h3>📊 支払い履歴</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>支払日</th>
+                                <th>発注番号</th>
+                                <th>仕入先</th>
+                                <th>関連工事</th>
+                                <th>支払額</th>
+                                <th>支払方法</th>
+                                <th>残額</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="payablePaymentsTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 経費管理 -->
+            <div id="expenses-sheet" class="sheet">
+                <h2>💰 経費管理</h2>
+
+                <div class="form-group">
+                    <div class="form-row">
+                        <div class="form-col">
+                            <label for="expenseProject">関連工事</label>
+                            <select id="expenseProject"><option value="">工事を選択</option><option value="PRJ-2025-001">田中様邸キッチンリフォーム (田中太郎)</option><option value="PRJ-2025-002">山田商店事務所改装 (山田商店)</option></select>
+                        </div>
+                        <div class="form-col">
+                            <label for="expenseDate">支出日 *</label>
+                            <input type="date" id="expenseDate" required="">
+                        </div>
+                        <div class="form-col">
+                            <label for="expenseCategory">費目 *</label>
+                            <select id="expenseCategory" required="">
+                                <option value="">選択してください</option>
+                                <option value="材料費">材料費</option>
+                                <option value="外注費">外注費</option>
+                                <option value="交通費">交通費</option>
+                                <option value="工具購入費">工具購入費</option>
+                                <option value="消耗品費">消耗品費</option>
+                                <option value="通信費">通信費</option>
+                                <option value="広告宣伝費">広告宣伝費</option>
+                                <option value="接待交際費">接待交際費</option>
+                                <option value="その他">その他</option>
+                            </select>
+                        </div>
+                        <div class="form-col">
+                            <label for="expenseAmount">金額（円） *</label>
+                            <input type="number" id="expenseAmount" min="0" required="">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-col">
+                            <label for="expenseSupplier">取引先</label>
+                            <input type="text" id="expenseSupplier">
+                        </div>
+                        <div class="form-col">
+                            <label for="expensePayment">支払方法</label>
+                            <select id="expensePayment">
+                                <option value="現金">現金</option>
+                                <option value="銀行振込">銀行振込</option>
+                                <option value="クレジットカード">クレジットカード</option>
+                                <option value="小切手">小切手</option>
+                            </select>
+                        </div>
+                        <div class="form-col">
+                            <label for="expenseReceipt">領収書番号</label>
+                            <input type="text" id="expenseReceipt">
+                        </div>
+                        <div class="form-col">
+                            <label for="taxDeductible">税務区分</label>
+                            <select id="taxDeductible">
+                                <option value="課税">課税</option>
+                                <option value="非課税">非課税</option>
+                                <option value="不課税">不課税</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="expenseDescription">摘要・詳細</label>
+                        <textarea id="expenseDescription" placeholder="支出内容の詳細を記入してください"></textarea>
+                    </div>
+
+                    <button class="btn btn-primary" onclick="addExpense()">経費を登録</button>
+                    <button class="btn btn-info" onclick="exportExpensesCSV()">CSV出力</button>
+                </div>
+
+                <div class="summary-grid">
+                    <div class="summary-card primary">
+                        <h3>今月の総経費</h3>
+                        <div class="summary-value" id="monthlyExpenses">¥0</div>
+                        <p>前月比較も表示予定</p>
+                    </div>
+                    <div class="summary-card warning">
+                        <h3>最多費目</h3>
+                        <div class="summary-value" id="topExpenseCategory">-</div>
+                        <p>今月の経費分析</p>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>日付</th>
+                                <th>関連工事</th>
+                                <th>費目</th>
+                                <th>金額</th>
+                                <th>取引先</th>
+                                <th>支払方法</th>
+                                <th>摘要</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="expensesTableBody">
+                    <tr>
+                        <td>2025-01-16</td>
+                        <td>田中様邸キッチンリフォーム</td>
+                        <td>材料費</td>
+                        <td>¥450,000</td>
+                        <td>タカラスタンダード</td>
+                        <td>銀行振込</td>
+                        <td>システムキッチン本体・部材</td>
+                        <td>
+                            <button class="btn btn-warning btn-sm" onclick="editExpense(&#39;EXP-2025-001&#39;)">編集</button>
+                            <button class="btn btn-danger btn-sm" onclick="deleteExpense(&#39;EXP-2025-001&#39;)">削除</button>
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>2025-01-12</td>
+                        <td>山田商店事務所改装</td>
+                        <td>材料費</td>
+                        <td>¥120,000</td>
+                        <td>内装資材商事</td>
+                        <td>現金</td>
+                        <td>壁紙・床材</td>
+                        <td>
+                            <button class="btn btn-warning btn-sm" onclick="editExpense(&#39;EXP-2025-002&#39;)">編集</button>
+                            <button class="btn btn-danger btn-sm" onclick="deleteExpense(&#39;EXP-2025-002&#39;)">削除</button>
+                        </td>
+                    </tr>
+                </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 請求書管理 -->
+            <div id="invoices-sheet" class="sheet">
+                <h2>📋 請求書管理</h2>
+
+                <div class="form-group">
+                    <div class="form-row">
+                        <div class="form-col">
+                            <label for="invoiceProject">対象工事 *</label>
+                            <select id="invoiceProject" required=""><option value="">工事を選択</option><option value="PRJ-2025-001">田中様邸キッチンリフォーム (田中太郎)</option><option value="PRJ-2025-002">山田商店事務所改装 (山田商店)</option></select>
+                        </div>
+                        <div class="form-col">
+                            <label for="invoiceDate">請求書発行日 *</label>
+                            <input type="date" id="invoiceDate" required="">
+                        </div>
+                        <div class="form-col">
+                            <label for="invoiceDueDate">入金予定日</label>
+                            <input type="date" id="invoiceDueDate">
+                        </div>
+                        <div class="form-col">
+                            <label for="invoiceAmount">請求金額（円） *</label>
+                            <input type="number" id="invoiceAmount" min="0" required="">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-col">
+                            <label for="invoiceNumber">請求書番号</label>
+                            <input type="text" id="invoiceNumber" placeholder="自動生成されます">
+                        </div>
+                        <div class="form-col">
+                            <label for="taxAmount">消費税額（円）</label>
+                            <input type="number" id="taxAmount" min="0">
+                        </div>
+                        <div class="form-col">
+                            <label for="invoiceStatus">ステータス</label>
+                            <select id="invoiceStatus">
+                                <option value="下書き">下書き</option>
+                                <option value="発行済">発行済</option>
+                                <option value="送付済">送付済</option>
+                            </select>
+                        </div>
+                        <div class="form-col">
+                            <label for="paymentTerms">支払条件</label>
+                            <select id="paymentTerms">
+                                <option value="月末締翌月末払">月末締翌月末払</option>
+                                <option value="当月末払">当月末払</option>
+                                <option value="翌月20日払">翌月20日払</option>
+                                <option value="現金">現金</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="invoiceNotes">請求書備考</label>
+                        <textarea id="invoiceNotes" placeholder="請求書に記載する特記事項"></textarea>
+                    </div>
+
+                    <button class="btn btn-primary" onclick="addInvoice()">請求書を発行</button>
+                    <button class="btn btn-info" onclick="exportInvoicesCSV()">CSV出力</button>
+                </div>
+
+                <div class="summary-grid">
+                    <div class="summary-card success">
+                        <h3>今月の請求額</h3>
+                        <div class="summary-value" id="monthlyInvoices">¥0</div>
+                        <p>発行済み請求書の合計</p>
+                    </div>
+                    <div class="summary-card warning">
+                        <h3>未回収請求額</h3>
+                        <div class="summary-value" id="unpaidInvoices">¥480,000</div>
+                        <p>未入金・一部入金の合計</p>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>請求書番号</th>
+                                <th>工事名</th>
+                                <th>顧客名</th>
+                                <th>発行日</th>
+                                <th>請求額</th>
+                                <th>入金状況</th>
+                                <th>入金額/請求額</th>
+                                <th>入金予定日</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="invoicesTableBody">
+                    <tr class="aging-30">
+                        <td>INV-2025-001</td>
+                        <td>山田商店事務所改装</td>
+                        <td>山田商店</td>
+                        <td>2025-01-26</td>
+                        <td>¥880,000</td>
+                        <td><span class="status status-partial">一部入金</span></td>
+                        <td>¥400,000 / ¥880,000</td>
+                        <td>2025-02-26 ⚠️</td>
+                        <td>
+                            <button class="btn btn-success btn-sm" onclick="registerPayment(&#39;SEI-2025-001&#39;)">入金登録</button>
+                            <button class="btn btn-warning btn-sm" onclick="editInvoice(&#39;SEI-2025-001&#39;)">編集</button>
+                            <button class="btn btn-danger btn-sm" onclick="deleteInvoice(&#39;SEI-2025-001&#39;)">削除</button>
+                        </td>
+                    </tr>
+                </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 入金記録 -->
+            <div id="payments-sheet" class="sheet">
+                <h2>💳 入金記録・管理</h2>
+
+                <div class="payment-form">
+                    <h3>🔹 入金登録フォーム</h3>
+                    <div class="form-row">
+                        <div class="form-col">
+                            <label for="paymentInvoice">請求書番号 *</label>
+                            <select id="paymentInvoice" required=""><option value="">未入金・一部入金の請求書を選択</option>
+                        <option value="SEI-2025-001">
+                            INV-2025-001 - 山田商店事務所改装 (山田商店) - 残額:¥480,000
+                        </option>
+                    </select>
+                        </div>
+                        <div class="form-col">
+                            <label for="paymentDate">入金日 *</label>
+                            <input type="date" id="paymentDate" required="">
+                        </div>
+                        <div class="form-col">
+                            <label for="paymentAmount">入金額（円） *</label>
+                            <input type="number" id="paymentAmount" min="1" required="">
+                        </div>
+                        <div class="form-col">
+                            <label for="paymentMethod">入金方法</label>
+                            <select id="paymentMethod">
+                                <option value="振込">振込</option>
+                                <option value="現金">現金</option>
+                                <option value="手形">手形</option>
+                                <option value="その他">その他</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-col">
+                            <label for="paymentPayer">振込名義人（異なる場合）</label>
+                            <input type="text" id="paymentPayer" placeholder="顧客名と異なる場合のみ入力">
+                        </div>
+                        <div class="form-col">
+                            <label for="paymentMemo">メモ欄</label>
+                            <textarea id="paymentMemo" placeholder="入金に関する特記事項"></textarea>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-success" onclick="addPayment()">💰 入金を登録</button>
+                </div>
+
+                <div class="summary-grid">
+                    <div class="summary-card success">
+                        <h3>今月の入金額</h3>
+                        <div class="summary-value" id="monthlyPayments">¥0</div>
+                        <p>当月入金実績</p>
+                    </div>
+                    <div class="summary-card danger">
+                        <h3>未回収金額</h3>
+                        <div class="summary-value" id="totalReceivables">¥480,000</div>
+                        <p>全請求書の未回収分</p>
+                    </div>
+                    <div class="summary-card primary">
+                        <h3>入金予定額（今月）</h3>
+                        <div class="summary-value" id="expectedPayments">¥0</div>
+                        <p>今月入金予定の金額</p>
+                    </div>
+                </div>
+
+                <h3>📋 入金履歴テーブル</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>入金日</th>
+                                <th>請求書番号</th>
+                                <th>工事名</th>
+                                <th>顧客名</th>
+                                <th>入金額</th>
+                                <th>入金方法</th>
+                                <th>残額</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="paymentsTableBody">
+                    <tr>
+                        <td>2025-02-20</td>
+                        <td>INV-2025-001</td>
+                        <td>山田商店事務所改装</td>
+                        <td>山田商店</td>
+                        <td>¥400,000</td>
+                        <td>振込</td>
+                        <td>¥480,000</td>
+                        <td>
+                            <button class="btn btn-warning btn-sm" onclick="editPayment(&#39;PAY-2025-001&#39;)">編集</button>
+                            <button class="btn btn-danger btn-sm" onclick="deletePayment(&#39;PAY-2025-001&#39;)">削除</button>
+                        </td>
+                    </tr>
+                </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- 売掛金管理 -->
+            <div id="receivables-sheet" class="sheet">
+                <h2>📊 売掛金管理</h2>
+
+                <div class="summary-grid">
+                    <div class="summary-card danger">
+                        <h3>総売掛金残高</h3>
+                        <div class="summary-value" id="totalReceivablesAmount">¥480,000</div>
+                        <p>全未回収金額の合計</p>
+                    </div>
+                    <div class="summary-card warning">
+                        <h3>30日以上経過</h3>
+                        <div class="summary-value" id="overdue30">¥480,000</div>
+                        <p>回収要注意案件</p>
+                    </div>
+                </div>
+
+                <h3>📋 未回収請求書一覧</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>請求書番号</th>
+                                <th>発行日</th>
+                                <th>顧客名</th>
+                                <th>請求額</th>
+                                <th>入金額</th>
+                                <th>残額</th>
+                                <th>入金予定日</th>
+                                <th>経過日数</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="receivablesTableBody">
+                    <tr class="aging-30">
+                        <td>INV-2025-001</td>
+                        <td>2025-01-26</td>
+                        <td>山田商店</td>
+                        <td>¥880,000</td>
+                        <td>¥400,000</td>
+                        <td>¥480,000</td>
+                        <td>2025-02-26</td>
+                        <td>302日</td>
+                        <td>
+                            <button class="btn btn-success btn-sm" onclick="registerPayment(&#39;SEI-2025-001&#39;)">入金登録</button>
+                        </td>
+                    </tr>
+                </tbody>
+                    </table>
+                </div>
+
+                <h3>👥 顧客別売掛金サマリー</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>顧客名</th>
+                                <th>未回収件数</th>
+                                <th>未回収金額</th>
+                                <th>最古請求日</th>
+                                <th>連絡状況</th>
+                            </tr>
+                        </thead>
+                        <tbody id="customerReceivablesBody">
+                    <tr>
+                        <td>山田商店</td>
+                        <td>1件</td>
+                        <td>¥480,000</td>
+                        <td>2025-01-26</td>
+                        <td>
+                            <button class="btn btn-info btn-sm" onclick="contactCustomer(&#39;山田商店&#39;)">連絡</button>
+                        </td>
+                    </tr>
+                </tbody>
+                    </table>
+                </div>
+
+                <h3>📅 入金予定カレンダー</h3>
+                <div class="alert alert-info">
+                    <strong>今週の入金予定：</strong> <span id="thisWeekExpected">¥480,000</span><br>
+                    <strong>来週の入金予定：</strong> <span id="nextWeekExpected">¥0</span><br>
+                    <strong>今月の入金予定：</strong> <span id="thisMonthExpected">¥480,000</span>
+                </div>
+            </div>
+
+            <!-- キャッシュフロー分析 -->
+            <div id="cashflow-sheet" class="sheet">
+                <h2>💹 月次キャッシュフロー分析</h2>
+
+                <div class="summary-grid">
+                    <div class="summary-card success">
+                        <h3>今月の売上（請求額）</h3>
+                        <div class="summary-value" id="monthlySales">¥0</div>
+                        <p>請求書ベースの売上</p>
+                    </div>
+                    <div class="summary-card primary">
+                        <h3>今月の入金額</h3>
+                        <div class="summary-value" id="monthlyReceipts">¥0</div>
+                        <p>実際の入金ベース</p>
+                    </div>
+                    <div class="summary-card warning">
+                        <h3>入金率</h3>
+                        <div class="summary-value" id="paymentRate">0%</div>
+                        <p>売上に対する入金割合</p>
+                    </div>
+                    <div class="summary-card danger">
+                        <h3>未回収金額</h3>
+                        <div class="summary-value" id="outstandingAmount">¥0</div>
+                        <p>回収待ちの総額</p>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <canvas id="cashflowChart"></canvas>
+                </div>
+
+                <div class="chart-container">
+                    <h3>入金予定 vs 実績の比較</h3>
+                    <canvas id="forecastChart"></canvas>
+                </div>
+            </div>
+
+            <!-- 月次損益計算書 -->
+            <div id="monthly-sheet" class="sheet">
+                <h2>📈 月次損益計算書</h2>
+
+                <div class="form-row">
+                    <div class="form-col">
+                        <label for="monthlyYear">年</label>
+                        <select id="monthlyYear">
+                            <option value="2025">2025年</option>
+                            <option value="2024">2024年</option>
+                        </select>
+                    </div>
+                    <div class="form-col">
+                        <label for="monthlyMonth">月</label>
+                        <select id="monthlyMonth">
+                            <option value="1">1月</option>
+                            <option value="2">2月</option>
+                            <option value="3">3月</option>
+                            <option value="4">4月</option>
+                            <option value="5">5月</option>
+                            <option value="6">6月</option>
+                            <option value="7">7月</option>
+                            <option value="8">8月</option>
+                            <option value="9">9月</option>
+                            <option value="10">10月</option>
+                            <option value="11">11月</option>
+                            <option value="12">12月</option>
+                        </select>
+                    </div>
+                    <div class="form-col">
+                        <button class="btn btn-primary" onclick="generateMonthlyReport()">レポート生成</button>
+                        <button class="btn btn-info" onclick="exportMonthlyCSV()">CSV出力</button>
+                    </div>
+                </div>
+
+                <div id="monthlyReport">
+                    <h3>📊 発生主義損益 vs 現金主義損益</h3>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>項目</th>
+                                    <th>発生主義（請求ベース）</th>
+                                    <th>現金主義（入金ベース）</th>
+                                    <th>差額</th>
+                                </tr>
+                            </thead>
+                            <tbody id="monthlyReportBody">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 年次分析 -->
+            <div id="yearly-sheet" class="sheet">
+                <h2>📅 年次分析</h2>
+
+                <div class="form-row">
+                    <div class="form-col">
+                        <label for="yearlyAnalysisYear">分析年度</label>
+                        <select id="yearlyAnalysisYear">
+                            <option value="2025">2025年</option>
+                            <option value="2024">2024年</option>
+                        </select>
+                    </div>
+                    <div class="form-col">
+                        <button class="btn btn-primary" onclick="generateYearlyReport()">年次レポート生成</button>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <canvas id="yearlyChart"></canvas>
+                </div>
+
+                <div id="yearlyReport">
+                    <div class="summary-grid">
+                        <div class="summary-card primary">
+                            <h3>年間売上高</h3>
+                            <div class="summary-value" id="yearlySales">¥0</div>
+                            <p>請求書ベース</p>
+                        </div>
+                        <div class="summary-card success">
+                            <h3>年間経費</h3>
+                            <div class="summary-value" id="yearlyExpenses">¥0</div>
+                            <p>支出ベース</p>
+                        </div>
+                        <div class="summary-card warning">
+                            <h3>年間利益</h3>
+                            <div class="summary-value" id="yearlyProfit">¥0</div>
+                            <p>売上 - 経費</p>
+                        </div>
+                        <div class="summary-card danger">
+                            <h3>利益率</h3>
+                            <div class="summary-value" id="yearlyMargin">0%</div>
+                            <p>利益 ÷ 売上</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 税務資料 -->
+            <div id="tax-sheet" class="sheet">
+                <h2>🧾 税務資料作成</h2>
+
+                <div class="alert alert-info">
+                    <strong>📋 税理士提出用資料の準備</strong><br>
+                    確定申告や税務調査に必要な資料を生成します。
+                </div>
+
+                <div class="form-row">
+                    <div class="form-col">
+                        <label for="taxYear">対象年度</label>
+                        <select id="taxYear">
+                            <option value="2025">2025年</option>
+                            <option value="2024">2024年</option>
+                        </select>
+                    </div>
+                    <div class="form-col">
+                        <button class="btn btn-success" onclick="generateTaxReports()">📊 税務資料一括生成</button>
+                    </div>
+                </div>
+
+                <div class="summary-grid">
+                    <div class="summary-card primary">
+                        <h3>売上台帳</h3>
+                        <div class="summary-value">📋</div>
+                        <button class="btn btn-info" onclick="exportSalesLedger()">売上台帳CSV</button>
+                    </div>
+                    <div class="summary-card success">
+                        <h3>経費台帳</h3>
+                        <div class="summary-value">💰</div>
+                        <button class="btn btn-info" onclick="exportExpenseLedger()">経費台帳CSV</button>
+                    </div>
+                    <div class="summary-card warning">
+                        <h3>入金管理台帳</h3>
+                        <div class="summary-value">💳</div>
+                        <button class="btn btn-info" onclick="exportPaymentLedger()">入金台帳CSV</button>
+                    </div>
+                    <div class="summary-card danger">
+                        <h3>年間損益計算書</h3>
+                        <div class="summary-value">📈</div>
+                        <button class="btn btn-info" onclick="exportProfitLoss()">損益計算書CSV</button>
+                    </div>
+                </div>
+
+                <div id="taxDocuments">
+                    <h3>📄 生成された税務書類</h3>
+                    <div id="taxDocumentsList">
+                        <p>税務資料を生成すると、ここにダウンロードリンクが表示されます。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 使い方マニュアル -->
+            <div id="manual-sheet" class="sheet">
+                <h2>📖 エムズインテリア経理システム 使い方ガイド</h2>
+
+                <div class="alert alert-success">
+                    <strong>🎉 システム概要</strong><br>
+                    工事管理から入金管理まで、建設業の経理業務を一元管理できるシステムです。
+                </div>
+
+                <h3>🚀 基本的な使い方の流れ</h3>
+
+                <div class="summary-grid">
+                    <div class="summary-card primary">
+                        <h3>1. 🏗️ 工事台帳</h3>
+                        <p><strong>新規工事の登録</strong></p>
+                        <ul>
+                            <li>工事名、顧客名を入力</li>
+                            <li>契約金額と工期を設定</li>
+                            <li>担当者と場所を記録</li>
+                        </ul>
+                    </div>
+
+                    <div class="summary-card info">
+                        <h3>2. 👥 顧客台帳</h3>
+                        <p><strong>NEW! 顧客情報の管理</strong></p>
+                        <ul>
+                            <li>顧客の基本情報を登録</li>
+                            <li>連絡先・住所を一元管理</li>
+                            <li>顧客分類で整理</li>
+                        </ul>
+                    </div>
+
+                    <div class="summary-card info">
+                        <h3>3. 🏢 仕入先台帳</h3>
+                        <p><strong>NEW! 仕入先情報の管理</strong></p>
+                        <ul>
+                            <li>仕入先の基本情報を登録</li>
+                            <li>支払条件を記録</li>
+                            <li>仕入先分類で整理</li>
+                        </ul>
+                    </div>
+
+                    <div class="summary-card success">
+                        <h3>4. 💰 経費管理</h3>
+                        <p><strong>工事関連経費の記録</strong></p>
+                        <ul>
+                            <li>材料費、外注費等を分類</li>
+                            <li>領収書番号も管理</li>
+                            <li>税務区分を正確に設定</li>
+                        </ul>
+                    </div>
+
+                    <div class="summary-card danger">
+                        <h3>5. 📋 買掛金管理</h3>
+                        <p><strong>NEW! 発注・支払い管理</strong></p>
+                        <ul>
+                            <li>仕入先への発注を記録</li>
+                            <li>支払状況を管理</li>
+                            <li>買掛金を自動計算</li>
+                        </ul>
+                    </div>
+
+                    <div class="summary-card warning">
+                        <h3>6. 📋 請求書発行</h3>
+                        <p><strong>完了工事の請求処理</strong></p>
+                        <ul>
+                            <li>工事完了後に請求書作成</li>
+                            <li>入金予定日を設定</li>
+                            <li>消費税の自動計算</li>
+                        </ul>
+                    </div>
+
+                    <div class="summary-card success">
+                        <h3>7. 💳 入金管理</h3>
+                        <p><strong>入金確認機能</strong></p>
+                        <ul>
+                            <li>請求書と入金を紐付け</li>
+                            <li>部分入金にも対応</li>
+                            <li>売掛金を自動計算</li>
+                        </ul>
+                    </div>
+                </div>
+
+
+                <h3>🆕 新機能の詳細</h3>
+
+                <div style="margin: 20px 0;">
+                    <h4>👥 顧客台帳</h4>
+                    <ul>
+                        <li>顧客コード、顧客名、フリガナの管理</li>
+                        <li>郵便番号、住所、電話番号、メールアドレスの記録</li>
+                        <li>担当者名と取引開始日の管理</li>
+                        <li>顧客分類（個人、法人、不動産会社、建設会社など）</li>
+                        <li>備考欄でメモ管理</li>
+                    </ul>
+                </div>
+
+                <div style="margin: 20px 0;">
+                    <h4>🏢 仕入先台帳</h4>
+                    <ul>
+                        <li>仕入先コード、仕入先名、フリガナの管理</li>
+                        <li>郵便番号、住所、電話番号、メールアドレスの記録</li>
+                        <li>担当者名と取引開始日の管理</li>
+                        <li>仕入先分類（材料業者、外注業者、設備業者など）</li>
+                        <li>支払条件の記録（例: 月末締め翌月末払い）</li>
+                        <li>備考欄でメモ管理</li>
+                    </ul>
+                </div>
+
+                <div style="margin: 20px 0;">
+                    <h4>📋 買掛金管理</h4>
+                    <ul>
+                        <li>発注日、仕入先、関連工事の記録</li>
+                        <li>費目（材料費、外注費、設備費など）と発注金額の管理</li>
+                        <li>支払予定日の設定</li>
+                        <li>支払い記録（支払日、支払額、支払方法）</li>
+                        <li>部分支払いにも対応</li>
+                        <li>買掛金の自動計算（発注金額 - 支払済額）</li>
+                        <li>支払状況の自動更新（未払い、一部支払い、支払済）</li>
+                        <li>支払い履歴の一覧表示</li>
+                    </ul>
+                </div>
+
+                <h3>📊 新機能：入金管理の詳細</h3>
+                <div class="alert alert-warning">
+                    <strong>💡 入金管理機能のポイント</strong>
+                    <ul>
+                        <li><strong>自動ステータス更新：</strong> 入金登録で請求書状況が自動更新</li>
+                        <li><strong>部分入金対応：</strong> 複数回に分けた入金も正確に管理</li>
+                        <li><strong>売掛金管理：</strong> 未回収金額を自動計算・表示</li>
+                        <li><strong>入金遅延アラート：</strong> 入金予定日を過ぎた案件を強調表示</li>
+                        <li><strong>キャッシュフロー分析：</strong> 売上と入金の差を可視化</li>
+                    </ul>
+                </div>
+
+                <h3>🔍 各タブの機能詳細</h3>
+
+                <div style="margin: 20px 0;">
+                    <h4>📊 売掛金管理タブ</h4>
+                    <ul>
+                        <li>未回収請求書を一覧表示</li>
+                        <li>経過日数による色分け（30日以上=赤、15-29日=黄、14日以内=緑）</li>
+                        <li>顧客別の売掛金サマリー</li>
+                        <li>入金予定カレンダー機能</li>
+                    </ul>
+                </div>
+
+                <div style="margin: 20px 0;">
+                    <h4>💹 キャッシュフロータブ</h4>
+                    <ul>
+                        <li>月別入金実績をグラフ表示</li>
+                        <li>入金予定 vs 実績の比較分析</li>
+                        <li>売上（請求ベース）と入金（現金ベース）の差異分析</li>
+                    </ul>
+                </div>
+
+                <div style="margin: 20px 0;">
+                    <h4>📈 月次損益計算書の改良</h4>
+                    <ul>
+                        <li>発生主義（請求ベース）の損益</li>
+                        <li>現金主義（入金ベース）の損益</li>
+                        <li>両者の差額分析で資金繰り状況を把握</li>
+                    </ul>
+                </div>
+
+                <h3>💾 データの保存について</h3>
+                <div class="alert alert-info">
+                    <ul>
+                        <li><strong>自動保存：</strong> 入力データは全てブラウザに自動保存されます</li>
+                        <li><strong>データ移行：</strong> CSV出力機能で他システムへのデータ移行も可能</li>
+                        <li><strong>バックアップ：</strong> 定期的なCSV出力でバックアップを推奨</li>
+                    </ul>
+                </div>
+
+                <h3>📱 モバイル対応</h3>
+                <p>iPhone・iPad等のタブレットでも使いやすいよう最適化されています。現場での経費入力や入金確認も簡単に行えます。</p>
+
+                <div class="alert alert-success">
+                    <strong>🎯 おすすめ運用フロー</strong><br>
+                    <ol>
+                        <li>工事受注時に「工事台帳」で登録</li>
+                        <li>材料購入等の都度「経費管理」で記録</li>
+                        <li>工事完了時に「請求書管理」で請求書発行</li>
+                        <li>入金確認時に「入金記録」で入金登録</li>
+                        <li>月末に「売掛金管理」で未回収をチェック</li>
+                        <li>四半期ごとに「税務資料」でCSV出力し税理士に提出</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    <script>
+        // Global Data Storage
+        let projects = JSON.parse(localStorage.getItem('msinterior_projects') || '[]');
+        let clients = JSON.parse(localStorage.getItem('msinterior_clients') || '[]');
+        let suppliers = JSON.parse(localStorage.getItem('msinterior_suppliers') || '[]');
+        let expenses = JSON.parse(localStorage.getItem('msinterior_expenses') || '[]');
+        let payables = JSON.parse(localStorage.getItem('msinterior_payables') || '[]');
+        let invoices = JSON.parse(localStorage.getItem('msinterior_invoices') || '[]');
+        let payments = JSON.parse(localStorage.getItem('msinterior_payments') || '[]');
+
+        // Initialize system on load
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeSystem();
+        });
+
+        function initializeSystem() {
+            // Set current date as default
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('projectDate').value = today;
+            document.getElementById('expenseDate').value = today;
+            document.getElementById('invoiceDate').value = today;
+            document.getElementById('paymentDate').value = today;
+
+            // Set current month in monthly report
+            const currentDate = new Date();
+            document.getElementById('monthlyMonth').value = currentDate.getMonth() + 1;
+            document.getElementById('monthlyYear').value = currentDate.getFullYear();
+            document.getElementById('yearlyAnalysisYear').value = currentDate.getFullYear();
+            document.getElementById('taxYear').value = currentDate.getFullYear();
+
+            // Load sample data if no data exists
+            if (projects.length === 0) {
+                loadSampleData();
+            }
+
+            // Refresh all displays
+            refreshAllDisplays();
+        }
+
+        function loadSampleData() {
+            const sampleProjects = [
+                {
+                    id: 'PRJ-2025-001',
+                    name: '田中様邸キッチンリフォーム',
+                    client: '田中太郎',
+                    startDate: '2025-01-15',
+                    completionDate: '2025-02-15',
+                    contractAmount: 1200000,
+                    status: '進行中',
+                    location: '東京都品川区',
+                    manager: '佐藤',
+                    notes: 'システムキッチン交換・内装工事',
+                    timestamp: new Date().toISOString()
+                },
+                {
+                    id: 'PRJ-2025-002',
+                    name: '山田商店事務所改装',
+                    client: '山田商店',
+                    startDate: '2025-01-10',
+                    completionDate: '2025-01-25',
+                    contractAmount: 800000,
+                    status: '完了',
+                    location: '東京都渋谷区',
+                    manager: '鈴木',
+                    notes: 'オフィス内装・電気工事',
+                    timestamp: new Date().toISOString()
+                }
+            ];
+
+            const sampleExpenses = [
+                {
+                    id: 'EXP-2025-001',
+                    projectId: 'PRJ-2025-001',
+                    date: '2025-01-16',
+                    category: '材料費',
+                    amount: 450000,
+                    supplier: 'タカラスタンダード',
+                    paymentMethod: '銀行振込',
+                    receiptNumber: 'R-20250116-001',
+                    taxType: '課税',
+                    description: 'システムキッチン本体・部材',
+                    timestamp: new Date().toISOString()
+                },
+                {
+                    id: 'EXP-2025-002',
+                    projectId: 'PRJ-2025-002',
+                    date: '2025-01-12',
+                    category: '材料費',
+                    amount: 120000,
+                    supplier: '内装資材商事',
+                    paymentMethod: '現金',
+                    receiptNumber: 'R-20250112-001',
+                    taxType: '課税',
+                    description: '壁紙・床材',
+                    timestamp: new Date().toISOString()
+                }
+            ];
+
+            const sampleInvoices = [
+                {
+                    id: 'SEI-2025-001',
+                    invoiceNumber: 'INV-2025-001',
+                    projectId: 'PRJ-2025-002',
+                    issueDate: '2025-01-26',
+                    dueDate: '2025-02-26',
+                    totalAmount: 880000,
+                    taxAmount: 80000,
+                    status: '発行済',
+                    paymentTerms: '月末締翌月末払',
+                    notes: '山田商店様事務所改装工事一式',
+                    timestamp: new Date().toISOString()
+                }
+            ];
+
+            const samplePayments = [
+                {
+                    id: 'PAY-2025-001',
+                    invoiceId: 'SEI-2025-001',
+                    paymentDate: '2025-02-20',
+                    amount: 400000,
+                    method: '振込',
+                    payer: '',
+                    memo: '部分入金',
+                    timestamp: new Date().toISOString()
+                }
+            ];
+
+            projects = sampleProjects;
+            expenses = sampleExpenses;
+            invoices = sampleInvoices;
+            payments = samplePayments;
+
+            saveAllData();
+        }
+
+        // Data Management Functions
+        function saveAllData() {
+            localStorage.setItem('msinterior_projects', JSON.stringify(projects));
+            localStorage.setItem('msinterior_expenses', JSON.stringify(expenses));
+            localStorage.setItem('msinterior_invoices', JSON.stringify(invoices));
+            localStorage.setItem('msinterior_payments', JSON.stringify(payments));
+        }
+
+        function generateId(prefix) {
+            const year = new Date().getFullYear();
+            const count = (prefix === 'PRJ' ? projects.length : 
+                          prefix === 'EXP' ? expenses.length : 
+                          prefix === 'SEI' ? invoices.length :
+                          prefix === 'PAY' ? payments.length : 0) + 1;
+            return `${prefix}-${year}-${String(count).padStart(3, '0')}`;
+        }
+
+        // Payment Status Calculation
+        function calculatePaymentStatus(invoiceId) {
+            const invoice = invoices.find(inv => inv.id === invoiceId);
+            if (!invoice) return { status: '未請求', paidAmount: 0, remainingAmount: 0 };
+
+            const relatedPayments = payments.filter(pay => pay.invoiceId === invoiceId);
+            const paidAmount = relatedPayments.reduce((sum, pay) => sum + Number(pay.amount), 0);
+            const invoiceAmount = Number(invoice.totalAmount);
+            const remainingAmount = invoiceAmount - paidAmount;
+
+            let status;
+            if (paidAmount === 0) {
+                status = '未入金';
+            } else if (remainingAmount <= 0) {
+                status = '入金済';
+            } else {
+                status = '一部入金';
+            }
+
+            return { status, paidAmount, remainingAmount };
+        }
+
+        // Tab Navigation
+        function showSheet(sheetName) {
+            // Hide all sheets
+            const sheets = document.querySelectorAll('.sheet');
+            sheets.forEach(sheet => sheet.classList.remove('active'));
+
+            // Remove active class from all tabs
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+
+            // Show selected sheet
+            const selectedSheet = document.getElementById(sheetName + '-sheet');
+            if (selectedSheet) {
+                selectedSheet.classList.add('active');
+            }
+
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+
+            // Refresh data for the selected sheet
+            refreshSheetData(sheetName);
+        }
+
+        function refreshSheetData(sheetName) {
+            switch(sheetName) {
+                case 'construction':
+                    displayProjects();
+                    updateProjectDropdowns();
+                    break;
+                case 'expenses':
+                    displayExpenses();
+                    updateExpenseSummary();
+                    break;
+                case 'invoices':
+                    displayInvoices();
+                    updateInvoiceSummary();
+                    break;
+                case 'payments':
+                    displayPayments();
+                    updatePaymentSummary();
+                    updatePaymentInvoiceDropdown();
+                    break;
+                case 'receivables':
+                    displayReceivables();
+                    updateReceivableSummary();
+                    break;
+                case 'cashflow':
+                    updateCashflowAnalysis();
+                    break;
+            }
+        }
+
+        function refreshAllDisplays() {
+            displayProjects();
+            displayClients();
+            displaySuppliers();
+            displayExpenses();
+            displayPayables();
+            displayPayablePayments();
+            displayInvoices();
+            displayPayments();
+            displayReceivables();
+            updateAllSummaries();
+            updateAllDropdowns();
+        }
+
+        function updateAllSummaries() {
+            updateExpenseSummary();
+            updateInvoiceSummary();
+            updatePaymentSummary();
+            updateReceivableSummary();
+        }
+
+        function updateAllDropdowns() {
+            updateProjectDropdowns();
+            updatePayableSupplierOptions();
+            updatePayableProjectOptions();
+            updatePayablePaymentOptions();
+            updatePaymentInvoiceDropdown();
+        }
+
+        // Project Management
+        function addProject() {
+            const name = document.getElementById('projectName').value.trim();
+            const client = document.getElementById('clientName').value.trim();
+
+            if (!name || !client) {
+                alert('工事名と顧客名は必須項目です。');
+                return;
+            }
+
+            const project = {
+                id: generateId('PRJ'),
+                name: name,
+                client: client,
+                startDate: document.getElementById('projectDate').value,
+                completionDate: document.getElementById('completionDate').value,
+                contractAmount: Number(document.getElementById('contractAmount').value) || 0,
+                status: document.getElementById('projectStatus').value,
+                location: document.getElementById('projectLocation').value,
+                manager: document.getElementById('projectManager').value,
+                notes: document.getElementById('projectNotes').value,
+                timestamp: new Date().toISOString()
+            };
+
+            projects.push(project);
+            saveAllData();
+            clearProjectForm();
+            refreshAllDisplays();
+            alert('工事が正常に登録されました。');
+        }
+
+        function clearProjectForm() {
+            document.getElementById('projectName').value = '';
+            document.getElementById('clientName').value = '';
+            document.getElementById('projectDate').value = new Date().toISOString().split('T')[0];
+            document.getElementById('completionDate').value = '';
+            document.getElementById('contractAmount').value = '';
+            document.getElementById('projectStatus').value = '計画中';
+            document.getElementById('projectLocation').value = '';
+            document.getElementById('projectManager').value = '';
+            document.getElementById('projectNotes').value = '';
+        }
+
+        function displayProjects() {
+            const tbody = document.getElementById('projectsTableBody');
+            if (!tbody) return;
+
+            tbody.innerHTML = '';
+
+            projects.forEach(project => {
+                const paymentStatus = getProjectPaymentStatus(project.id);
+                const row = `
+                    <tr>
+                        <td>${project.name}</td>
+                        <td>${project.client}</td>
+                        <td>¥${project.contractAmount.toLocaleString()}</td>
+                        <td>${project.startDate || '-'}</td>
+                        <td>${project.completionDate || '-'}</td>
+                        <td><span class="status status-${project.status}">${project.status}</span></td>
+                        <td><span class="status status-${paymentStatus.statusClass}">${paymentStatus.status}</span></td>
+                        <td>
+                            <button class="btn btn-warning btn-sm" onclick="editProject('${project.id}')">編集</button>
+                            <button class="btn btn-danger btn-sm" onclick="deleteProject('${project.id}')">削除</button>
+                        </td>
+                    </tr>
+                `;
+                tbody.innerHTML += row;
+            });
+        }
+
+        function getProjectPaymentStatus(projectId) {
+            const projectInvoices = invoices.filter(inv => inv.projectId === projectId);
+            if (projectInvoices.length === 0) {
+                return { status: '未請求', statusClass: 'not-invoiced' };
+            }
+
+            let totalInvoiceAmount = 0;
+            let totalPaidAmount = 0;
+
+            projectInvoices.forEach(invoice => {
+                totalInvoiceAmount += Number(invoice.totalAmount);
+                const paymentStatus = calculatePaymentStatus(invoice.id);
+                totalPaidAmount += paymentStatus.paidAmount;
+            });
+
+            if (totalPaidAmount === 0) {
+                return { status: '未入金', statusClass: 'unpaid' };
+            } else if (totalPaidAmount >= totalInvoiceAmount) {
+                return { status: '入金済', statusClass: 'paid' };
+            } else {
+                return { status: '一部入金', statusClass: 'partial' };
+            }
+        }
+
+        function updateProjectDropdowns() {
+            const expenseProject = document.getElementById('expenseProject');
+            const invoiceProject = document.getElementById('invoiceProject');
+
+            if (expenseProject) {
+                expenseProject.innerHTML = '<option value="">工事を選択</option>';
+                projects.forEach(project => {
+                    expenseProject.innerHTML += `<option value="${project.id}">${project.name} (${project.client})</option>`;
+                });
+            }
+
+            if (invoiceProject) {
+                invoiceProject.innerHTML = '<option value="">工事を選択</option>';
+                projects.forEach(project => {
+                    invoiceProject.innerHTML += `<option value="${project.id}">${project.name} (${project.client})</option>`;
+                });
+            }
+        }
+
+        // Expense Management  
+        function addExpense() {
+            const date = document.getElementById('expenseDate').value;
+            const category = document.getElementById('expenseCategory').value;
+            const amount = document.getElementById('expenseAmount').value;
+
+            if (!date || !category || !amount) {
+                alert('支出日、費目、金額は必須項目です。');
+                return;
+            }
+
+            const expense = {
+                id: generateId('EXP'),
+                projectId: document.getElementById('expenseProject').value,
+                date: date,
+                category: category,
+                amount: Number(amount),
+                supplier: document.getElementById('expenseSupplier').value,
+                paymentMethod: document.getElementById('expensePayment').value,
+                receiptNumber: document.getElementById('expenseReceipt').value,
+                taxType: document.getElementById('taxDeductible').value,
+                description: document.getElementById('expenseDescription').value,
+                timestamp: new Date().toISOString()
+            };
+
+            expenses.push(expense);
+            saveAllData();
+            clearExpenseForm();
+            refreshAllDisplays();
+            alert('経費が正常に登録されました。');
+        }
+
+        function clearExpenseForm() {
+            document.getElementById('expenseProject').value = '';
+            document.getElementById('expenseDate').value = new Date().toISOString().split('T')[0];
+            document.getElementById('expenseCategory').value = '';
+            document.getElementById('expenseAmount').value = '';
+            document.getElementById('expenseSupplier').value = '';
+            document.getElementById('expensePayment').value = '現金';
+            document.getElementById('expenseReceipt').value = '';
+            document.getElementById('taxDeductible').value = '課税';
+            document.getElementById('expenseDescription').value = '';
+        }
+
+        function displayExpenses() {
+            const tbody = document.getElementById('expensesTableBody');
+            if (!tbody) return;
+
+            tbody.innerHTML = '';
+
+            expenses.forEach(expense => {
+                const project = projects.find(p => p.id === expense.projectId);
+                const projectName = project ? project.name : '一般経費';
+
+                const row = `
+                    <tr>
+                        <td>${expense.date}</td>
+                        <td>${projectName}</td>
+                        <td>${expense.category}</td>
+                        <td>¥${expense.amount.toLocaleString()}</td>
+                        <td>${expense.supplier || '-'}</td>
+                        <td>${expense.paymentMethod}</td>
+                        <td>${expense.description || '-'}</td>
+                        <td>
+                            <button class="btn btn-warning btn-sm" onclick="editExpense('${expense.id}')">編集</button>
+                            <button class="btn btn-danger btn-sm" onclick="deleteExpense('${expense.id}')">削除</button>
+                        </td>
+                    </tr>
+                `;
+                tbody.innerHTML += row;
+            });
+        }
+
+        function updateExpenseSummary() {
+            const now = new Date();
+            const currentMonth = now.getMonth() + 1;
+            const currentYear = now.getFullYear();
+
+            const monthlyExpenseTotal = expenses
+                .filter(exp => {
+                    const expDate = new Date(exp.date);
+                    return expDate.getMonth() + 1 === currentMonth && expDate.getFullYear() === currentYear;
+                })
+                .reduce((sum, exp) => sum + Number(exp.amount), 0);
+
+            const monthlyExpenseElement = document.getElementById('monthlyExpenses');
+            if (monthlyExpenseElement) {
+                monthlyExpenseElement.textContent = `¥${monthlyExpenseTotal.toLocaleString()}`;
+            }
+
+            // Calculate top expense category
+            const categoryTotals = {};
+            expenses.forEach(exp => {
+                const expDate = new Date(exp.date);
+                if (expDate.getMonth() + 1 === currentMonth && expDate.getFullYear() === currentYear) {
+                    categoryTotals[exp.category] = (categoryTotals[exp.category] || 0) + Number(exp.amount);
+                }
+            });
+
+            let topCategory = '-';
+            let maxAmount = 0;
+            Object.entries(categoryTotals).forEach(([category, total]) => {
+                if (total > maxAmount) {
+                    maxAmount = total;
+                    topCategory = category;
+                }
+            });
+
+            const topCategoryElement = document.getElementById('topExpenseCategory');
+            if (topCategoryElement) {
+                topCategoryElement.textContent = topCategory;
+            }
+        }
+        // Invoice Management
+        function addInvoice() {
+            const projectId = document.getElementById('invoiceProject').value;
+            const issueDate = document.getElementById('invoiceDate').value;
+            const totalAmount = document.getElementById('invoiceAmount').value;
+
+            if (!projectId || !issueDate || !totalAmount) {
+                alert('対象工事、発行日、請求金額は必須項目です。');
+                return;
+            }
+
+            const invoiceNumber = document.getElementById('invoiceNumber').value || generateInvoiceNumber();
+
+            const invoice = {
+                id: generateId('SEI'),
+                invoiceNumber: invoiceNumber,
+                projectId: projectId,
+                issueDate: issueDate,
+                dueDate: document.getElementById('invoiceDueDate').value,
+                totalAmount: Number(totalAmount),
+                taxAmount: Number(document.getElementById('taxAmount').value) || 0,
+                status: document.getElementById('invoiceStatus').value,
+                paymentTerms: document.getElementById('paymentTerms').value,
+                notes: document.getElementById('invoiceNotes').value,
+                timestamp: new Date().toISOString()
+            };
+
+            invoices.push(invoice);
+            saveAllData();
+            clearInvoiceForm();
+            refreshAllDisplays();
+            alert('請求書が正常に発行されました。');
+        }
+
+        function generateInvoiceNumber() {
+            const year = new Date().getFullYear();
+            const month = String(new Date().getMonth() + 1).padStart(2, '0');
+            const count = invoices.length + 1;
+            return `INV-${year}${month}-${String(count).padStart(3, '0')}`;
+        }
+
+        function clearInvoiceForm() {
+            document.getElementById('invoiceProject').value = '';
+            document.getElementById('invoiceDate').value = new Date().toISOString().split('T')[0];
+            document.getElementById('invoiceDueDate').value = '';
+            document.getElementById('invoiceAmount').value = '';
+            document.getElementById('invoiceNumber').value = '';
+            document.getElementById('taxAmount').value = '';
+            document.getElementById('invoiceStatus').value = '下書き';
+            document.getElementById('paymentTerms').value = '月末締翌月末払';
+            document.getElementById('invoiceNotes').value = '';
+        }
+
+        function displayInvoices() {
+            const tbody = document.getElementById('invoicesTableBody');
+            if (!tbody) return;
+
+            tbody.innerHTML = '';
+
+            invoices.forEach(invoice => {
+                const project = projects.find(p => p.id === invoice.projectId);
+                const paymentStatus = calculatePaymentStatus(invoice.id);
+                const statusClass = paymentStatus.status === '入金済' ? 'paid' : 
+                                   paymentStatus.status === '一部入金' ? 'partial' : 'unpaid';
+
+                // Check for overdue
+                const today = new Date();
+                const dueDate = new Date(invoice.dueDate);
+                const isOverdue = invoice.dueDate && dueDate < today && paymentStatus.status !== '入金済';
+
+                const row = `
+                    <tr ${isOverdue ? 'class="aging-30"' : ''}>
+                        <td>${invoice.invoiceNumber}</td>
+                        <td>${project ? project.name : '不明な工事'}</td>
+                        <td>${project ? project.client : '不明な顧客'}</td>
+                        <td>${invoice.issueDate}</td>
+                        <td>¥${invoice.totalAmount.toLocaleString()}</td>
+                        <td><span class="status status-${statusClass}">${paymentStatus.status}</span></td>
+                        <td>¥${paymentStatus.paidAmount.toLocaleString()} / ¥${invoice.totalAmount.toLocaleString()}</td>
+                        <td>${invoice.dueDate || '-'}${isOverdue ? ' ⚠️' : ''}</td>
+                        <td>
+                            <button class="btn btn-success btn-sm" onclick="registerPayment('${invoice.id}')">入金登録</button>
+                            <button class="btn btn-warning btn-sm" onclick="editInvoice('${invoice.id}')">編集</button>
+                            <button class="btn btn-danger btn-sm" onclick="deleteInvoice('${invoice.id}')">削除</button>
+                        </td>
+                    </tr>
+                `;
+                tbody.innerHTML += row;
+            });
+        }
+
+        function updateInvoiceSummary() {
+            const now = new Date();
+            const currentMonth = now.getMonth() + 1;
+            const currentYear = now.getFullYear();
+
+            // Monthly invoices
+            const monthlyInvoiceTotal = invoices
+                .filter(inv => {
+                    const invDate = new Date(inv.issueDate);
+                    return invDate.getMonth() + 1 === currentMonth && invDate.getFullYear() === currentYear;
+                })
+                .reduce((sum, inv) => sum + Number(inv.totalAmount), 0);
+
+            const monthlyInvoicesElement = document.getElementById('monthlyInvoices');
+            if (monthlyInvoicesElement) {
+                monthlyInvoicesElement.textContent = `¥${monthlyInvoiceTotal.toLocaleString()}`;
+            }
+
+            // Unpaid invoices
+            let unpaidTotal = 0;
+            invoices.forEach(invoice => {
+                const paymentStatus = calculatePaymentStatus(invoice.id);
+                unpaidTotal += paymentStatus.remainingAmount;
+            });
+
+            const unpaidInvoicesElement = document.getElementById('unpaidInvoices');
+            if (unpaidInvoicesElement) {
+                unpaidInvoicesElement.textContent = `¥${unpaidTotal.toLocaleString()}`;
+            }
+        }
+
+        // Payment Management
+        function addPayment() {
+            const invoiceId = document.getElementById('paymentInvoice').value;
+            const paymentDate = document.getElementById('paymentDate').value;
+            const amount = document.getElementById('paymentAmount').value;
+
+            if (!invoiceId || !paymentDate || !amount) {
+                alert('請求書番号、入金日、入金額は必須項目です。');
+                return;
+            }
+
+            const invoice = invoices.find(inv => inv.id === invoiceId);
+            if (!invoice) {
+                alert('選択された請求書が見つかりません。');
+                return;
+            }
+
+            const currentPaymentStatus = calculatePaymentStatus(invoiceId);
+            const remainingAmount = currentPaymentStatus.remainingAmount;
+
+            if (Number(amount) > remainingAmount) {
+                alert(`入金額が残額（¥${remainingAmount.toLocaleString()}）を超えています。`);
+                return;
+            }
+
+            const payment = {
+                id: generateId('PAY'),
+                invoiceId: invoiceId,
+                paymentDate: paymentDate,
+                amount: Number(amount),
+                method: document.getElementById('paymentMethod').value,
+                payer: document.getElementById('paymentPayer').value,
+                memo: document.getElementById('paymentMemo').value,
+                timestamp: new Date().toISOString()
+            };
+
+            payments.push(payment);
+            saveAllData();
+            clearPaymentForm();
+            refreshAllDisplays();
+
+            const newPaymentStatus = calculatePaymentStatus(invoiceId);
+            const statusMessage = newPaymentStatus.status === '入金済' ? 
+                '入金が完了しました。' : `部分入金が登録されました。残額：¥${newPaymentStatus.remainingAmount.toLocaleString()}`;
+            alert(statusMessage);
+        }
+
+        function clearPaymentForm() {
+            document.getElementById('paymentInvoice').value = '';
+            document.getElementById('paymentDate').value = new Date().toISOString().split('T')[0];
+            document.getElementById('paymentAmount').value = '';
+            document.getElementById('paymentMethod').value = '振込';
+            document.getElementById('paymentPayer').value = '';
+            document.getElementById('paymentMemo').value = '';
+        }
+
+        function displayPayments() {
+            const tbody = document.getElementById('paymentsTableBody');
+            if (!tbody) return;
+
+            tbody.innerHTML = '';
+
+            payments.forEach(payment => {
+                const invoice = invoices.find(inv => inv.id === payment.invoiceId);
+                const project = invoice ? projects.find(p => p.id === invoice.projectId) : null;
+                const paymentStatus = calculatePaymentStatus(payment.invoiceId);
+
+                const row = `
+                    <tr>
+                        <td>${payment.paymentDate}</td>
+                        <td>${invoice ? invoice.invoiceNumber : '不明'}</td>
+                        <td>${project ? project.name : '不明な工事'}</td>
+                        <td>${project ? project.client : '不明な顧客'}</td>
+                        <td>¥${payment.amount.toLocaleString()}</td>
+                        <td>${payment.method}</td>
+                        <td>¥${paymentStatus.remainingAmount.toLocaleString()}</td>
+                        <td>
+                            <button class="btn btn-warning btn-sm" onclick="editPayment('${payment.id}')">編集</button>
+                            <button class="btn btn-danger btn-sm" onclick="deletePayment('${payment.id}')">削除</button>
+                        </td>
+                    </tr>
+                `;
+                tbody.innerHTML += row;
+            });
+        }
+
+        function updatePaymentSummary() {
+            const now = new Date();
+            const currentMonth = now.getMonth() + 1;
+            const currentYear = now.getFullYear();
+
+            // Monthly payments
+            const monthlyPaymentTotal = payments
+                .filter(pay => {
+                    const payDate = new Date(pay.paymentDate);
+                    return payDate.getMonth() + 1 === currentMonth && payDate.getFullYear() === currentYear;
+                })
+                .reduce((sum, pay) => sum + Number(pay.amount), 0);
+
+            const monthlyPaymentsElement = document.getElementById('monthlyPayments');
+            if (monthlyPaymentsElement) {
+                monthlyPaymentsElement.textContent = `¥${monthlyPaymentTotal.toLocaleString()}`;
+            }
+
+            // Total receivables
+            let totalReceivables = 0;
+            invoices.forEach(invoice => {
+                const paymentStatus = calculatePaymentStatus(invoice.id);
+                totalReceivables += paymentStatus.remainingAmount;
+            });
+
+            const totalReceivablesElement = document.getElementById('totalReceivables');
+            if (totalReceivablesElement) {
+                totalReceivablesElement.textContent = `¥${totalReceivables.toLocaleString()}`;
+            }
+
+            // Expected payments (current month)
+            const expectedPayments = invoices
+                .filter(inv => {
+                    if (!inv.dueDate) return false;
+                    const dueDate = new Date(inv.dueDate);
+                    return dueDate.getMonth() + 1 === currentMonth && dueDate.getFullYear() === currentYear;
+                })
+                .reduce((sum, inv) => {
+                    const paymentStatus = calculatePaymentStatus(inv.id);
+                    return sum + paymentStatus.remainingAmount;
+                }, 0);
+
+            const expectedPaymentsElement = document.getElementById('expectedPayments');
+            if (expectedPaymentsElement) {
+                expectedPaymentsElement.textContent = `¥${expectedPayments.toLocaleString()}`;
+            }
+        }
+
+        function updatePaymentInvoiceDropdown() {
+            const paymentInvoice = document.getElementById('paymentInvoice');
+            if (!paymentInvoice) return;
+
+            paymentInvoice.innerHTML = '<option value="">未入金・一部入金の請求書を選択</option>';
+
+            invoices.forEach(invoice => {
+                const paymentStatus = calculatePaymentStatus(invoice.id);
+                if (paymentStatus.status !== '入金済') {
+                    const project = projects.find(p => p.id === invoice.projectId);
+                    const projectName = project ? project.name : '不明な工事';
+                    const clientName = project ? project.client : '不明な顧客';
+                    const remainingAmount = paymentStatus.remainingAmount;
+
+                    paymentInvoice.innerHTML += `
+                        <option value="${invoice.id}">
+                            ${invoice.invoiceNumber} - ${projectName} (${clientName}) - 残額:¥${remainingAmount.toLocaleString()}
+                        </option>
+                    `;
+                }
+            });
+        }
+
+        function registerPayment(invoiceId) {
+            document.getElementById('paymentInvoice').value = invoiceId;
+            showSheet('payments');
+        }
+
+        // Receivables Management
+        function displayReceivables() {
+            const tbody = document.getElementById('receivablesTableBody');
+            if (!tbody) return;
+
+            tbody.innerHTML = '';
+
+            const unpaidInvoices = invoices.filter(invoice => {
+                const paymentStatus = calculatePaymentStatus(invoice.id);
+                return paymentStatus.remainingAmount > 0;
+            });
+
+            unpaidInvoices.forEach(invoice => {
+                const project = projects.find(p => p.id === invoice.projectId);
+                const paymentStatus = calculatePaymentStatus(invoice.id);
+
+                // Calculate aging
+                const today = new Date();
+                const issueDate = new Date(invoice.issueDate);
+                const daysPassed = Math.floor((today - issueDate) / (1000 * 60 * 60 * 24));
+
+                let agingClass = '';
+                if (daysPassed >= 30) agingClass = 'aging-30';
+                else if (daysPassed >= 15) agingClass = 'aging-15';
+                else agingClass = 'aging-current';
+
+                const row = `
+                    <tr class="${agingClass}">
+                        <td>${invoice.invoiceNumber}</td>
+                        <td>${invoice.issueDate}</td>
+                        <td>${project ? project.client : '不明な顧客'}</td>
+                        <td>¥${invoice.totalAmount.toLocaleString()}</td>
+                        <td>¥${paymentStatus.paidAmount.toLocaleString()}</td>
+                        <td>¥${paymentStatus.remainingAmount.toLocaleString()}</td>
+                        <td>${invoice.dueDate || '-'}</td>
+                        <td>${daysPassed}日</td>
+                        <td>
+                            <button class="btn btn-success btn-sm" onclick="registerPayment('${invoice.id}')">入金登録</button>
+                        </td>
+                    </tr>
+                `;
+                tbody.innerHTML += row;
+            });
+
+            // Update customer receivables summary
+            updateCustomerReceivables();
+        }
+
+        function updateCustomerReceivables() {
+            const tbody = document.getElementById('customerReceivablesBody');
+            if (!tbody) return;
+
+            tbody.innerHTML = '';
+
+            const customerSummary = {};
+
+            invoices.forEach(invoice => {
+                const project = projects.find(p => p.id === invoice.projectId);
+                const clientName = project ? project.client : '不明な顧客';
+                const paymentStatus = calculatePaymentStatus(invoice.id);
+
+                if (paymentStatus.remainingAmount > 0) {
+                    if (!customerSummary[clientName]) {
+                        customerSummary[clientName] = {
+                            count: 0,
+                            amount: 0,
+                            oldestDate: invoice.issueDate
+                        };
+                    }
+
+                    customerSummary[clientName].count++;
+                    customerSummary[clientName].amount += paymentStatus.remainingAmount;
+
+                    if (new Date(invoice.issueDate) < new Date(customerSummary[clientName].oldestDate)) {
+                        customerSummary[clientName].oldestDate = invoice.issueDate;
+                    }
+                }
+            });
+
+            Object.entries(customerSummary).forEach(([client, summary]) => {
+                const row = `
+                    <tr>
+                        <td>${client}</td>
+                        <td>${summary.count}件</td>
+                        <td>¥${summary.amount.toLocaleString()}</td>
+                        <td>${summary.oldestDate}</td>
+                        <td>
+                            <button class="btn btn-info btn-sm" onclick="contactCustomer('${client}')">連絡</button>
+                        </td>
+                    </tr>
+                `;
+                tbody.innerHTML += row;
+            });
+        }
+
+        function updateReceivableSummary() {
+            // Total receivables amount
+            let totalReceivablesAmount = 0;
+            let overdue30Amount = 0;
+
+            invoices.forEach(invoice => {
+                const paymentStatus = calculatePaymentStatus(invoice.id);
+                totalReceivablesAmount += paymentStatus.remainingAmount;
+
+                const today = new Date();
+                const issueDate = new Date(invoice.issueDate);
+                const daysPassed = Math.floor((today - issueDate) / (1000 * 60 * 60 * 24));
+
+                if (daysPassed >= 30 && paymentStatus.remainingAmount > 0) {
+                    overdue30Amount += paymentStatus.remainingAmount;
+                }
+            });
+
+            const totalReceivablesAmountElement = document.getElementById('totalReceivablesAmount');
+            if (totalReceivablesAmountElement) {
+                totalReceivablesAmountElement.textContent = `¥${totalReceivablesAmount.toLocaleString()}`;
+            }
+
+            const overdue30Element = document.getElementById('overdue30');
+            if (overdue30Element) {
+                overdue30Element.textContent = `¥${overdue30Amount.toLocaleString()}`;
+            }
+
+            // Update expected payments calendar
+            updateExpectedPaymentsCalendar();
+        }
+
+        function updateExpectedPaymentsCalendar() {
+            const today = new Date();
+            const thisWeekEnd = new Date(today.getTime() + 7 * 24 * 60 * 60 * 1000);
+            const nextWeekEnd = new Date(today.getTime() + 14 * 24 * 60 * 60 * 1000);
+            const thisMonthEnd = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+
+            let thisWeekExpected = 0;
+            let nextWeekExpected = 0;
+            let thisMonthExpected = 0;
+
+            invoices.forEach(invoice => {
+                if (!invoice.dueDate) return;
+
+                const dueDate = new Date(invoice.dueDate);
+                const paymentStatus = calculatePaymentStatus(invoice.id);
+                const remaining = paymentStatus.remainingAmount;
+
+                if (remaining > 0) {
+                    if (dueDate <= thisWeekEnd) {
+                        thisWeekExpected += remaining;
+                    } else if (dueDate <= nextWeekEnd) {
+                        nextWeekExpected += remaining;
+                    }
+
+                    if (dueDate <= thisMonthEnd) {
+                        thisMonthExpected += remaining;
+                    }
+                }
+            });
+
+            const thisWeekElement = document.getElementById('thisWeekExpected');
+            const nextWeekElement = document.getElementById('nextWeekExpected');
+            const thisMonthElement = document.getElementById('thisMonthExpected');
+
+            if (thisWeekElement) thisWeekElement.textContent = `¥${thisWeekExpected.toLocaleString()}`;
+            if (nextWeekElement) nextWeekElement.textContent = `¥${nextWeekExpected.toLocaleString()}`;
+            if (thisMonthElement) thisMonthElement.textContent = `¥${thisMonthExpected.toLocaleString()}`;
+        }
+        // Cash Flow Analysis
+        function updateCashflowAnalysis() {
+            const now = new Date();
+            const currentMonth = now.getMonth() + 1;
+            const currentYear = now.getFullYear();
+
+            // Calculate current month data
+            const monthlySales = invoices
+                .filter(inv => {
+                    const invDate = new Date(inv.issueDate);
+                    return invDate.getMonth() + 1 === currentMonth && invDate.getFullYear() === currentYear;
+                })
+                .reduce((sum, inv) => sum + Number(inv.totalAmount), 0);
+
+            const monthlyReceipts = payments
+                .filter(pay => {
+                    const payDate = new Date(pay.paymentDate);
+                    return payDate.getMonth() + 1 === currentMonth && payDate.getFullYear() === currentYear;
+                })
+                .reduce((sum, pay) => sum + Number(pay.amount), 0);
+
+            const paymentRate = monthlySales > 0 ? Math.round((monthlyReceipts / monthlySales) * 100) : 0;
+
+            let outstandingAmount = 0;
+            invoices.forEach(invoice => {
+                const paymentStatus = calculatePaymentStatus(invoice.id);
+                outstandingAmount += paymentStatus.remainingAmount;
+            });
+
+            // Update summary cards
+            updateElement('monthlySales', `¥${monthlySales.toLocaleString()}`);
+            updateElement('monthlyReceipts', `¥${monthlyReceipts.toLocaleString()}`);
+            updateElement('paymentRate', `${paymentRate}%`);
+            updateElement('outstandingAmount', `¥${outstandingAmount.toLocaleString()}`);
+
+            // Generate charts
+            generateCashflowChart();
+            generateForecastChart();
+        }
+
+        function generateCashflowChart() {
+            const ctx = document.getElementById('cashflowChart');
+            if (!ctx) return;
+
+            // Destroy existing chart if it exists
+            if (window.cashflowChartInstance) {
+                window.cashflowChartInstance.destroy();
+            }
+
+            // Get monthly data for the past 12 months
+            const monthlyData = getMonthlyAnalysisData();
+
+            window.cashflowChartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: monthlyData.labels,
+                    datasets: [
+                        {
+                            label: '請求額（売上）',
+                            data: monthlyData.invoiceAmounts,
+                            backgroundColor: 'rgba(102, 126, 234, 0.6)',
+                            borderColor: 'rgba(102, 126, 234, 1)',
+                            borderWidth: 1
+                        },
+                        {
+                            label: '入金額',
+                            data: monthlyData.paymentAmounts,
+                            backgroundColor: 'rgba(86, 171, 47, 0.6)',
+                            borderColor: 'rgba(86, 171, 47, 1)',
+                            borderWidth: 1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: '月別入金実績グラフ（過去12ヶ月）'
+                        },
+                        legend: {
+                            display: true
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return '¥' + value.toLocaleString();
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function generateForecastChart() {
+            const ctx = document.getElementById('forecastChart');
+            if (!ctx) return;
+
+            // Destroy existing chart if it exists
+            if (window.forecastChartInstance) {
+                window.forecastChartInstance.destroy();
+            }
+
+            const forecastData = getForecastData();
+
+            window.forecastChartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: forecastData.labels,
+                    datasets: [
+                        {
+                            label: '入金予定',
+                            data: forecastData.expected,
+                            borderColor: 'rgba(240, 147, 251, 1)',
+                            backgroundColor: 'rgba(240, 147, 251, 0.1)',
+                            tension: 0.4
+                        },
+                        {
+                            label: '入金実績',
+                            data: forecastData.actual,
+                            borderColor: 'rgba(79, 172, 254, 1)',
+                            backgroundColor: 'rgba(79, 172, 254, 0.1)',
+                            tension: 0.4
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: '入金予定 vs 実績の比較'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return '¥' + value.toLocaleString();
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function getMonthlyAnalysisData() {
+            const data = {
+                labels: [],
+                invoiceAmounts: [],
+                paymentAmounts: []
+            };
+
+            const now = new Date();
+
+            for (let i = 11; i >= 0; i--) {
+                const targetDate = new Date(now.getFullYear(), now.getMonth() - i, 1);
+                const month = targetDate.getMonth() + 1;
+                const year = targetDate.getFullYear();
+
+                data.labels.push(`${year}/${month}`);
+
+                // Calculate invoice amounts for this month
+                const monthlyInvoices = invoices
+                    .filter(inv => {
+                        const invDate = new Date(inv.issueDate);
+                        return invDate.getMonth() + 1 === month && invDate.getFullYear() === year;
+                    })
+                    .reduce((sum, inv) => sum + Number(inv.totalAmount), 0);
+
+                // Calculate payment amounts for this month
+                const monthlyPayments = payments
+                    .filter(pay => {
+                        const payDate = new Date(pay.paymentDate);
+                        return payDate.getMonth() + 1 === month && payDate.getFullYear() === year;
+                    })
+                    .reduce((sum, pay) => sum + Number(pay.amount), 0);
+
+                data.invoiceAmounts.push(monthlyInvoices);
+                data.paymentAmounts.push(monthlyPayments);
+            }
+
+            return data;
+        }
+
+        function getForecastData() {
+            const data = {
+                labels: [],
+                expected: [],
+                actual: []
+            };
+
+            const now = new Date();
+
+            for (let i = 5; i >= 0; i--) {
+                const targetDate = new Date(now.getFullYear(), now.getMonth() - i, 1);
+                const month = targetDate.getMonth() + 1;
+                const year = targetDate.getFullYear();
+
+                data.labels.push(`${year}/${month}`);
+
+                // Calculate expected payments (due dates in this month)
+                const expectedAmount = invoices
+                    .filter(inv => {
+                        if (!inv.dueDate) return false;
+                        const dueDate = new Date(inv.dueDate);
+                        return dueDate.getMonth() + 1 === month && dueDate.getFullYear() === year;
+                    })
+                    .reduce((sum, inv) => {
+                        const paymentStatus = calculatePaymentStatus(inv.id);
+                        return sum + paymentStatus.remainingAmount;
+                    }, 0);
+
+                // Calculate actual payments
+                const actualAmount = payments
+                    .filter(pay => {
+                        const payDate = new Date(pay.paymentDate);
+                        return payDate.getMonth() + 1 === month && payDate.getFullYear() === year;
+                    })
+                    .reduce((sum, pay) => sum + Number(pay.amount), 0);
+
+                data.expected.push(expectedAmount);
+                data.actual.push(actualAmount);
+            }
+
+            return data;
+        }
+
+        // Monthly Report Generation
+        function generateMonthlyReport() {
+            const year = Number(document.getElementById('monthlyYear').value);
+            const month = Number(document.getElementById('monthlyMonth').value);
+
+            const monthlyData = calculateMonthlyData(year, month);
+            displayMonthlyReport(monthlyData);
+        }
+
+        function calculateMonthlyData(year, month) {
+            // Accrual basis (invoice-based)
+            const accrualRevenue = invoices
+                .filter(inv => {
+                    const invDate = new Date(inv.issueDate);
+                    return invDate.getMonth() + 1 === month && invDate.getFullYear() === year;
+                })
+                .reduce((sum, inv) => sum + Number(inv.totalAmount), 0);
+
+            const accrualExpenses = expenses
+                .filter(exp => {
+                    const expDate = new Date(exp.date);
+                    return expDate.getMonth() + 1 === month && expDate.getFullYear() === year;
+                })
+                .reduce((sum, exp) => sum + Number(exp.amount), 0);
+
+            // Cash basis (payment-based)
+            const cashRevenue = payments
+                .filter(pay => {
+                    const payDate = new Date(pay.paymentDate);
+                    return payDate.getMonth() + 1 === month && payDate.getFullYear() === year;
+                })
+                .reduce((sum, pay) => sum + Number(pay.amount), 0);
+
+            const cashExpenses = accrualExpenses; // Assuming expenses are paid when recorded
+
+            return {
+                accrualRevenue,
+                accrualExpenses,
+                accrualProfit: accrualRevenue - accrualExpenses,
+                cashRevenue,
+                cashExpenses,
+                cashProfit: cashRevenue - cashExpenses
+            };
+        }
+
+        function displayMonthlyReport(data) {
+            const tbody = document.getElementById('monthlyReportBody');
+            if (!tbody) return;
+
+            tbody.innerHTML = `
+                <tr>
+                    <td><strong>売上</strong></td>
+                    <td>¥${data.accrualRevenue.toLocaleString()}</td>
+                    <td>¥${data.cashRevenue.toLocaleString()}</td>
+                    <td>¥${(data.cashRevenue - data.accrualRevenue).toLocaleString()}</td>
+                </tr>
+                <tr>
+                    <td><strong>経費</strong></td>
+                    <td>¥${data.accrualExpenses.toLocaleString()}</td>
+                    <td>¥${data.cashExpenses.toLocaleString()}</td>
+                    <td>¥${(data.cashExpenses - data.accrualExpenses).toLocaleString()}</td>
+                </tr>
+                <tr>
+                    <td><strong>利益</strong></td>
+                    <td>¥${data.accrualProfit.toLocaleString()}</td>
+                    <td>¥${data.cashProfit.toLocaleString()}</td>
+                    <td>¥${(data.cashProfit - data.accrualProfit).toLocaleString()}</td>
+                </tr>
+            `;
+        }
+
+        // Yearly Report Generation
+        function generateYearlyReport() {
+            const year = Number(document.getElementById('yearlyAnalysisYear').value);
+            const yearlyData = calculateYearlyData(year);
+            displayYearlyReport(yearlyData);
+            generateYearlyChart(year);
+        }
+
+        function calculateYearlyData(year) {
+            const yearlySales = invoices
+                .filter(inv => new Date(inv.issueDate).getFullYear() === year)
+                .reduce((sum, inv) => sum + Number(inv.totalAmount), 0);
+
+            const yearlyExpenses = expenses
+                .filter(exp => new Date(exp.date).getFullYear() === year)
+                .reduce((sum, exp) => sum + Number(exp.amount), 0);
+
+            const yearlyProfit = yearlySales - yearlyExpenses;
+            const yearlyMargin = yearlySales > 0 ? Math.round((yearlyProfit / yearlySales) * 100) : 0;
+
+            return { yearlySales, yearlyExpenses, yearlyProfit, yearlyMargin };
+        }
+
+        function displayYearlyReport(data) {
+            updateElement('yearlySales', `¥${data.yearlySales.toLocaleString()}`);
+            updateElement('yearlyExpenses', `¥${data.yearlyExpenses.toLocaleString()}`);
+            updateElement('yearlyProfit', `¥${data.yearlyProfit.toLocaleString()}`);
+            updateElement('yearlyMargin', `${data.yearlyMargin}%`);
+        }
+
+        function generateYearlyChart(year) {
+            const ctx = document.getElementById('yearlyChart');
+            if (!ctx) return;
+
+            if (window.yearlyChartInstance) {
+                window.yearlyChartInstance.destroy();
+            }
+
+            const monthlyData = [];
+            const labels = [];
+
+            for (let month = 1; month <= 12; month++) {
+                labels.push(`${month}月`);
+                const monthlyProfit = calculateMonthlyData(year, month);
+                monthlyData.push(monthlyProfit.accrualProfit);
+            }
+
+            window.yearlyChartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: '月次利益',
+                        data: monthlyData,
+                        borderColor: 'rgba(102, 126, 234, 1)',
+                        backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: `${year}年 月次利益推移`
+                        }
+                    },
+                    scales: {
+                        y: {
+                            ticks: {
+                                callback: function(value) {
+                                    return '¥' + value.toLocaleString();
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Tax Report Functions
+        function generateTaxReports() {
+            alert('税務資料の生成を開始します。各種台帳のCSVファイルを生成できます。');
+        }
+
+        // CSV Export Functions
+        function exportProjectsCSV() {
+            const headers = ['工事ID', '工事名', '顧客名', '契約金額', '開始日', '完了予定日', '状況', '場所', '担当者', '備考'];
+            const rows = projects.map(p => [
+                p.id, p.name, p.client, p.contractAmount, p.startDate || '', 
+                p.completionDate || '', p.status, p.location || '', p.manager || '', p.notes || ''
+            ]);
+            downloadCSV(headers, rows, 'projects.csv');
+        }
+
+        function exportExpensesCSV() {
+            const headers = ['経費ID', '関連工事', '日付', '費目', '金額', '取引先', '支払方法', '領収書番号', '税務区分', '摘要'];
+            const rows = expenses.map(e => {
+                const project = projects.find(p => p.id === e.projectId);
+                return [
+                    e.id, project ? project.name : '一般経費', e.date, e.category, e.amount,
+                    e.supplier || '', e.paymentMethod, e.receiptNumber || '', e.taxType, e.description || ''
+                ];
+            });
+            downloadCSV(headers, rows, 'expenses.csv');
+        }
+
+        function exportInvoicesCSV() {
+            const headers = ['請求書ID', '請求書番号', '工事名', '顧客名', '発行日', '請求金額', '消費税', '入金予定日', '状況', '備考'];
+            const rows = invoices.map(i => {
+                const project = projects.find(p => p.id === i.projectId);
+                return [
+                    i.id, i.invoiceNumber, project ? project.name : '不明', project ? project.client : '不明',
+                    i.issueDate, i.totalAmount, i.taxAmount, i.dueDate || '', i.status, i.notes || ''
+                ];
+            });
+            downloadCSV(headers, rows, 'invoices.csv');
+        }
+
+        function exportPaymentLedger() {
+            const headers = ['入金ID', '請求書番号', '工事名', '顧客名', '入金日', '入金額', '入金方法', '名義人', 'メモ'];
+            const rows = payments.map(p => {
+                const invoice = invoices.find(i => i.id === p.invoiceId);
+                const project = invoice ? projects.find(pr => pr.id === invoice.projectId) : null;
+                return [
+                    p.id, invoice ? invoice.invoiceNumber : '不明', 
+                    project ? project.name : '不明', project ? project.client : '不明',
+                    p.paymentDate, p.amount, p.method, p.payer || '', p.memo || ''
+                ];
+            });
+            downloadCSV(headers, rows, 'payments.csv');
+        }
+
+        function exportSalesLedger() {
+            const headers = ['請求書番号', '発行日', '顧客名', '工事名', '請求額', '入金額', '残額', '入金状況'];
+            const rows = invoices.map(i => {
+                const project = projects.find(p => p.id === i.projectId);
+                const paymentStatus = calculatePaymentStatus(i.id);
+                return [
+                    i.invoiceNumber, i.issueDate, project ? project.client : '不明',
+                    project ? project.name : '不明', i.totalAmount,
+                    paymentStatus.paidAmount, paymentStatus.remainingAmount, paymentStatus.status
+                ];
+            });
+            downloadCSV(headers, rows, 'sales_ledger.csv');
+        }
+
+        function exportExpenseLedger() {
+            exportExpensesCSV(); // Same as expense export
+        }
+
+        function exportProfitLoss() {
+            const currentYear = new Date().getFullYear();
+            const headers = ['月', '売上（請求ベース）', '売上（入金ベース）', '経費', '利益（請求ベース）', '利益（入金ベース）'];
+            const rows = [];
+
+            for (let month = 1; month <= 12; month++) {
+                const monthlyData = calculateMonthlyData(currentYear, month);
+                rows.push([
+                    `${month}月`, monthlyData.accrualRevenue, monthlyData.cashRevenue,
+                    monthlyData.accrualExpenses, monthlyData.accrualProfit, monthlyData.cashProfit
+                ]);
+            }
+            downloadCSV(headers, rows, 'profit_loss.csv');
+        }
+
+        function exportMonthlyCSV() {
+            const year = Number(document.getElementById('monthlyYear').value);
+            const month = Number(document.getElementById('monthlyMonth').value);
+            const monthlyData = calculateMonthlyData(year, month);
+
+            const headers = ['項目', '発生主義', '現金主義', '差額'];
+            const rows = [
+                ['売上', monthlyData.accrualRevenue, monthlyData.cashRevenue, monthlyData.cashRevenue - monthlyData.accrualRevenue],
+                ['経費', monthlyData.accrualExpenses, monthlyData.cashExpenses, monthlyData.cashExpenses - monthlyData.accrualExpenses],
+                ['利益', monthlyData.accrualProfit, monthlyData.cashProfit, monthlyData.cashProfit - monthlyData.accrualProfit]
+            ];
+            downloadCSV(headers, rows, `monthly_report_${year}_${month}.csv`);
+        }
+
+        // Utility Functions
+        function updateElement(id, value) {
+            const element = document.getElementById(id);
+            if (element) element.textContent = value;
+        }
+
+        function downloadCSV(headers, rows, filename) {
+            let csvContent = "data:text/csv;charset=utf-8,";
+            csvContent += headers.join(",") + "\n";
+            rows.forEach(row => {
+                csvContent += row.map(field => `"${field}"`).join(",") + "\n";
+            });
+
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", filename);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        function contactCustomer(customerName) {
+            alert(`${customerName}様への連絡機能は今後実装予定です。`);
+        }
+
+        // Placeholder edit/delete functions
+        function editProject(id) { alert('編集機能は今後実装予定です。'); }
+        function deleteProject(id) { 
+            if (confirm('この工事を削除しますか？')) {
+                projects = projects.filter(p => p.id !== id);
+                saveAllData();
+                refreshAllDisplays();
+            }
+        }
+        function editExpense(id) { alert('編集機能は今後実装予定です。'); }
+        function deleteExpense(id) { 
+            if (confirm('この経費を削除しますか？')) {
+                expenses = expenses.filter(e => e.id !== id);
+                saveAllData();
+                refreshAllDisplays();
+            }
+        }
+        function editInvoice(id) { alert('編集機能は今後実装予定です。'); }
+        function deleteInvoice(id) { 
+            if (confirm('この請求書を削除しますか？')) {
+                invoices = invoices.filter(i => i.id !== id);
+                payments = payments.filter(p => p.invoiceId !== id);
+                saveAllData();
+                refreshAllDisplays();
+            }
+        }
+        function editPayment(id) { alert('編集機能は今後実装予定です。'); }
+        function deletePayment(id) { 
+            if (confirm('この入金記録を削除しますか？')) {
+                payments = payments.filter(p => p.id !== id);
+                saveAllData();
+                refreshAllDisplays();
+            }
+        }
+
+        // ===== 顧客台帳管理 =====
+        function addClient() {
+            const clientData = {
+                id: 'CLI-' + new Date().getFullYear() + '-' + String(clients.length + 1).padStart(3, '0'),
+                code: document.getElementById('clientCode').value || 'CLI-' + String(clients.length + 1).padStart(4, '0'),
+                name: document.getElementById('clientRegName').value,
+                kana: document.getElementById('clientKana').value,
+                postal: document.getElementById('clientPostal').value,
+                address: document.getElementById('clientAddress').value,
+                phone: document.getElementById('clientPhone').value,
+                email: document.getElementById('clientEmail').value,
+                contact: document.getElementById('clientContact').value,
+                startDate: document.getElementById('clientStartDate').value,
+                category: document.getElementById('clientCategory').value,
+                notes: document.getElementById('clientNotes').value,
+                timestamp: new Date().toISOString()
+            };
+
+            if (!clientData.name) {
+                alert('顧客名を入力してください');
+                return;
+            }
+
+            clients.push(clientData);
+            localStorage.setItem('msinterior_clients', JSON.stringify(clients));
+            
+            alert('✅ 顧客を登録しました！');
+            clearClientForm();
+            displayClients();
+        }
+
+        function clearClientForm() {
+            document.getElementById('clientCode').value = '';
+            document.getElementById('clientRegName').value = '';
+            document.getElementById('clientKana').value = '';
+            document.getElementById('clientPostal').value = '';
+            document.getElementById('clientAddress').value = '';
+            document.getElementById('clientPhone').value = '';
+            document.getElementById('clientEmail').value = '';
+            document.getElementById('clientContact').value = '';
+            document.getElementById('clientStartDate').value = '';
+            document.getElementById('clientCategory').value = '個人';
+            document.getElementById('clientNotes').value = '';
+        }
+
+        function displayClients() {
+            const tbody = document.getElementById('clientsTableBody');
+            tbody.innerHTML = '';
+
+            clients.forEach(client => {
+                const row = tbody.insertRow();
+                row.innerHTML = `
+                    <td>${client.code}</td>
+                    <td><strong>${client.name}</strong></td>
+                    <td>${client.kana || '-'}</td>
+                    <td>${client.phone || '-'}</td>
+                    <td>${client.email || '-'}</td>
+                    <td>${client.address || '-'}</td>
+                    <td>${client.contact || '-'}</td>
+                    <td><span class="status">${client.category}</span></td>
+                    <td>${client.startDate || '-'}</td>
+                    <td>
+                        <button class="btn btn-warning btn-sm" onclick="editClient('${client.id}')">✏️ 編集</button>
+                        <button class="btn btn-danger btn-sm" onclick="deleteClient('${client.id}')">🗑️ 削除</button>
+                    </td>
+                `;
+            });
+        }
+
+        function editClient(id) {
+            const client = clients.find(c => c.id === id);
+            if (!client) return;
+
+            document.getElementById('clientCode').value = client.code;
+            document.getElementById('clientRegName').value = client.name;
+            document.getElementById('clientKana').value = client.kana || '';
+            document.getElementById('clientPostal').value = client.postal || '';
+            document.getElementById('clientAddress').value = client.address || '';
+            document.getElementById('clientPhone').value = client.phone || '';
+            document.getElementById('clientEmail').value = client.email || '';
+            document.getElementById('clientContact').value = client.contact || '';
+            document.getElementById('clientStartDate').value = client.startDate || '';
+            document.getElementById('clientCategory').value = client.category;
+            document.getElementById('clientNotes').value = client.notes || '';
+
+            deleteClient(id, true);
+        }
+
+        function deleteClient(id, skipConfirm = false) {
+            if (!skipConfirm && !confirm('この顧客を削除してもよろしいですか？')) return;
+
+            clients = clients.filter(c => c.id !== id);
+            localStorage.setItem('msinterior_clients', JSON.stringify(clients));
+            displayClients();
+        }
+
+        // ===== 仕入先台帳管理 =====
+        function addSupplier() {
+            const supplierData = {
+                id: 'SUP-' + new Date().getFullYear() + '-' + String(suppliers.length + 1).padStart(3, '0'),
+                code: document.getElementById('supplierCode').value || 'SUP-' + String(suppliers.length + 1).padStart(4, '0'),
+                name: document.getElementById('supplierRegName').value,
+                kana: document.getElementById('supplierKana').value,
+                postal: document.getElementById('supplierPostal').value,
+                address: document.getElementById('supplierAddress').value,
+                phone: document.getElementById('supplierPhone').value,
+                email: document.getElementById('supplierEmail').value,
+                contact: document.getElementById('supplierContact').value,
+                startDate: document.getElementById('supplierStartDate').value,
+                category: document.getElementById('supplierCategory').value,
+                paymentTerms: document.getElementById('supplierPaymentTerms').value,
+                notes: document.getElementById('supplierNotes').value,
+                timestamp: new Date().toISOString()
+            };
+
+            if (!supplierData.name) {
+                alert('仕入先名を入力してください');
+                return;
+            }
+
+            suppliers.push(supplierData);
+            localStorage.setItem('msinterior_suppliers', JSON.stringify(suppliers));
+            
+            alert('✅ 仕入先を登録しました！');
+            clearSupplierForm();
+            displaySuppliers();
+            updatePayableSupplierOptions();
+        }
+
+        function clearSupplierForm() {
+            document.getElementById('supplierCode').value = '';
+            document.getElementById('supplierRegName').value = '';
+            document.getElementById('supplierKana').value = '';
+            document.getElementById('supplierPostal').value = '';
+            document.getElementById('supplierAddress').value = '';
+            document.getElementById('supplierPhone').value = '';
+            document.getElementById('supplierEmail').value = '';
+            document.getElementById('supplierContact').value = '';
+            document.getElementById('supplierStartDate').value = '';
+            document.getElementById('supplierCategory').value = '材料業者';
+            document.getElementById('supplierPaymentTerms').value = '';
+            document.getElementById('supplierNotes').value = '';
+        }
+
+        function displaySuppliers() {
+            const tbody = document.getElementById('suppliersTableBody');
+            tbody.innerHTML = '';
+
+            suppliers.forEach(supplier => {
+                const row = tbody.insertRow();
+                row.innerHTML = `
+                    <td>${supplier.code}</td>
+                    <td><strong>${supplier.name}</strong></td>
+                    <td>${supplier.kana || '-'}</td>
+                    <td>${supplier.phone || '-'}</td>
+                    <td>${supplier.email || '-'}</td>
+                    <td>${supplier.address || '-'}</td>
+                    <td>${supplier.contact || '-'}</td>
+                    <td><span class="status">${supplier.category}</span></td>
+                    <td>${supplier.paymentTerms || '-'}</td>
+                    <td>${supplier.startDate || '-'}</td>
+                    <td>
+                        <button class="btn btn-warning btn-sm" onclick="editSupplier('${supplier.id}')">✏️ 編集</button>
+                        <button class="btn btn-danger btn-sm" onclick="deleteSupplier('${supplier.id}')">🗑️ 削除</button>
+                    </td>
+                `;
+            });
+        }
+
+        function editSupplier(id) {
+            const supplier = suppliers.find(s => s.id === id);
+            if (!supplier) return;
+
+            document.getElementById('supplierCode').value = supplier.code;
+            document.getElementById('supplierRegName').value = supplier.name;
+            document.getElementById('supplierKana').value = supplier.kana || '';
+            document.getElementById('supplierPostal').value = supplier.postal || '';
+            document.getElementById('supplierAddress').value = supplier.address || '';
+            document.getElementById('supplierPhone').value = supplier.phone || '';
+            document.getElementById('supplierEmail').value = supplier.email || '';
+            document.getElementById('supplierContact').value = supplier.contact || '';
+            document.getElementById('supplierStartDate').value = supplier.startDate || '';
+            document.getElementById('supplierCategory').value = supplier.category;
+            document.getElementById('supplierPaymentTerms').value = supplier.paymentTerms || '';
+            document.getElementById('supplierNotes').value = supplier.notes || '';
+
+            deleteSupplier(id, true);
+        }
+
+        function deleteSupplier(id, skipConfirm = false) {
+            if (!skipConfirm && !confirm('この仕入先を削除してもよろしいですか？')) return;
+
+            suppliers = suppliers.filter(s => s.id !== id);
+            localStorage.setItem('msinterior_suppliers', JSON.stringify(suppliers));
+            displaySuppliers();
+            updatePayableSupplierOptions();
+        }
+
+        // ===== 買掛金管理 =====
+        function addPayable() {
+            const payableData = {
+                id: 'PAY-' + new Date().getFullYear() + '-' + String(payables.length + 1).padStart(3, '0'),
+                date: document.getElementById('payableDate').value,
+                supplierId: document.getElementById('payableSupplier').value,
+                projectId: document.getElementById('payableProject').value,
+                category: document.getElementById('payableCategory').value,
+                amount: parseFloat(document.getElementById('payableAmount').value) || 0,
+                paidAmount: 0,
+                dueDate: document.getElementById('payableDueDate').value,
+                description: document.getElementById('payableDescription').value,
+                status: '未払い',
+                payments: [],
+                timestamp: new Date().toISOString()
+            };
+
+            if (!payableData.date || !payableData.supplierId || !payableData.description || payableData.amount <= 0) {
+                alert('必須項目を入力してください（発注日、仕入先、発注内容、発注金額）');
+                return;
+            }
+
+            payables.push(payableData);
+            localStorage.setItem('msinterior_payables', JSON.stringify(payables));
+            
+            alert('✅ 発注を登録しました！');
+            clearPayableForm();
+            displayPayables();
+            updatePayablePaymentOptions();
+        }
+
+        function clearPayableForm() {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('payableDate').value = today;
+            document.getElementById('payableSupplier').value = '';
+            document.getElementById('payableProject').value = '';
+            document.getElementById('payableCategory').value = '材料費';
+            document.getElementById('payableAmount').value = '';
+            document.getElementById('payableDueDate').value = '';
+            document.getElementById('payableDescription').value = '';
+        }
+
+        function displayPayables() {
+            const tbody = document.getElementById('payablesTableBody');
+            tbody.innerHTML = '';
+
+            let totalUnpaid = 0;
+            let totalPartial = 0;
+            let totalPaid = 0;
+
+            payables.forEach(payable => {
+                const supplier = suppliers.find(s => s.id === payable.supplierId);
+                const project = projects.find(p => p.id === payable.projectId);
+                const balance = payable.amount - payable.paidAmount;
+
+                let statusClass = 'status-unpaid';
+                let statusText = '未払い';
+                if (payable.paidAmount === 0) {
+                    totalUnpaid += balance;
+                } else if (payable.paidAmount < payable.amount) {
+                    statusClass = 'status-partial';
+                    statusText = '一部支払い';
+                    totalPartial += balance;
+                } else {
+                    statusClass = 'status-paid';
+                    statusText = '支払済';
+                    totalPaid += payable.amount;
+                }
+
+                const row = tbody.insertRow();
+                row.innerHTML = `
+                    <td><strong>${payable.id}</strong></td>
+                    <td>${payable.date}</td>
+                    <td>${supplier ? supplier.name : '-'}</td>
+                    <td>${project ? project.name : '-'}</td>
+                    <td>${payable.category}</td>
+                    <td>¥${payable.amount.toLocaleString()}</td>
+                    <td>¥${payable.paidAmount.toLocaleString()}</td>
+                    <td><strong>¥${balance.toLocaleString()}</strong></td>
+                    <td><span class="status ${statusClass}">${statusText}</span></td>
+                    <td>${payable.dueDate || '-'}</td>
+                    <td>${payable.description}</td>
+                    <td>
+                        <button class="btn btn-warning btn-sm" onclick="editPayable('${payable.id}')">✏️ 編集</button>
+                        <button class="btn btn-danger btn-sm" onclick="deletePayable('${payable.id}')">🗑️ 削除</button>
+                    </td>
+                `;
+            });
+
+            document.getElementById('totalUnpaidPayables').textContent = '¥' + totalUnpaid.toLocaleString();
+            document.getElementById('totalPartialPayables').textContent = '¥' + totalPartial.toLocaleString();
+            document.getElementById('totalPaidPayables').textContent = '¥' + totalPaid.toLocaleString();
+        }
+
+        function editPayable(id) {
+            const payable = payables.find(p => p.id === id);
+            if (!payable) return;
+
+            document.getElementById('payableDate').value = payable.date;
+            document.getElementById('payableSupplier').value = payable.supplierId;
+            document.getElementById('payableProject').value = payable.projectId || '';
+            document.getElementById('payableCategory').value = payable.category;
+            document.getElementById('payableAmount').value = payable.amount;
+            document.getElementById('payableDueDate').value = payable.dueDate || '';
+            document.getElementById('payableDescription').value = payable.description;
+
+            deletePayable(id, true);
+        }
+
+        function deletePayable(id, skipConfirm = false) {
+            if (!skipConfirm && !confirm('この発注を削除してもよろしいですか？')) return;
+
+            payables = payables.filter(p => p.id !== id);
+            localStorage.setItem('msinterior_payables', JSON.stringify(payables));
+            displayPayables();
+            displayPayablePayments();
+            updatePayablePaymentOptions();
+        }
+
+        function recordPayablePayment() {
+            const payableId = document.getElementById('payablePaymentId').value;
+            const paymentDate = document.getElementById('payablePaymentDate').value;
+            const paymentAmount = parseFloat(document.getElementById('payablePaymentAmount').value) || 0;
+            const paymentMethod = document.getElementById('payablePaymentMethod').value;
+
+            if (!payableId || !paymentDate || paymentAmount <= 0) {
+                alert('必須項目を入力してください');
+                return;
+            }
+
+            const payable = payables.find(p => p.id === payableId);
+            if (!payable) {
+                alert('発注が見つかりません');
+                return;
+            }
+
+            const balance = payable.amount - payable.paidAmount;
+            if (paymentAmount > balance) {
+                alert(`支払額が残額（¥${balance.toLocaleString()}）を超えています`);
+                return;
+            }
+
+            const paymentRecord = {
+                id: 'PAYPMT-' + Date.now(),
+                payableId: payableId,
+                date: paymentDate,
+                amount: paymentAmount,
+                method: paymentMethod,
+                timestamp: new Date().toISOString()
+            };
+
+            payable.paidAmount += paymentAmount;
+            if (!payable.payments) payable.payments = [];
+            payable.payments.push(paymentRecord);
+
+            if (payable.paidAmount >= payable.amount) {
+                payable.status = '支払済';
+            } else if (payable.paidAmount > 0) {
+                payable.status = '一部支払い';
+            }
+
+            localStorage.setItem('msinterior_payables', JSON.stringify(payables));
+
+            alert('✅ 支払いを記録しました！');
+            clearPayablePaymentForm();
+            displayPayables();
+            displayPayablePayments();
+        }
+
+        function clearPayablePaymentForm() {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('payablePaymentId').value = '';
+            document.getElementById('payablePaymentDate').value = today;
+            document.getElementById('payablePaymentAmount').value = '';
+            document.getElementById('payablePaymentMethod').value = '銀行振込';
+        }
+
+        function displayPayablePayments() {
+            const tbody = document.getElementById('payablePaymentsTableBody');
+            tbody.innerHTML = '';
+
+            const allPayments = [];
+            payables.forEach(payable => {
+                if (payable.payments && payable.payments.length > 0) {
+                    payable.payments.forEach(payment => {
+                        allPayments.push({
+                            ...payment,
+                            payable: payable
+                        });
+                    });
+                }
+            });
+
+            allPayments.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            allPayments.forEach(payment => {
+                const supplier = suppliers.find(s => s.id === payment.payable.supplierId);
+                const project = projects.find(p => p.id === payment.payable.projectId);
+                const balance = payment.payable.amount - payment.payable.paidAmount;
+
+                const row = tbody.insertRow();
+                row.innerHTML = `
+                    <td>${payment.date}</td>
+                    <td>${payment.payableId}</td>
+                    <td>${supplier ? supplier.name : '-'}</td>
+                    <td>${project ? project.name : '-'}</td>
+                    <td>¥${payment.amount.toLocaleString()}</td>
+                    <td>${payment.method}</td>
+                    <td><strong>¥${balance.toLocaleString()}</strong></td>
+                    <td>
+                        <button class="btn btn-danger btn-sm" onclick="deletePayablePayment('${payment.payableId}', '${payment.id}')">🗑️ 削除</button>
+                    </td>
+                `;
+            });
+        }
+
+        function deletePayablePayment(payableId, paymentId) {
+            if (!confirm('この支払い記録を削除してもよろしいですか？')) return;
+
+            const payable = payables.find(p => p.id === payableId);
+            if (!payable) return;
+
+            const payment = payable.payments.find(p => p.id === paymentId);
+            if (!payment) return;
+
+            payable.paidAmount -= payment.amount;
+            payable.payments = payable.payments.filter(p => p.id !== paymentId);
+
+            if (payable.paidAmount === 0) {
+                payable.status = '未払い';
+            } else if (payable.paidAmount < payable.amount) {
+                payable.status = '一部支払い';
+            }
+
+            localStorage.setItem('msinterior_payables', JSON.stringify(payables));
+            displayPayables();
+            displayPayablePayments();
+        }
+
+        function updatePayableSupplierOptions() {
+            const select = document.getElementById('payableSupplier');
+            select.innerHTML = '<option value="">-- 選択してください --</option>';
+            
+            suppliers.forEach(supplier => {
+                const option = document.createElement('option');
+                option.value = supplier.id;
+                option.textContent = supplier.name;
+                select.appendChild(option);
+            });
+        }
+
+        function updatePayableProjectOptions() {
+            const select = document.getElementById('payableProject');
+            select.innerHTML = '<option value="">-- 選択してください --</option>';
+            
+            projects.forEach(project => {
+                const option = document.createElement('option');
+                option.value = project.id;
+                option.textContent = project.name;
+                select.appendChild(option);
+            });
+        }
+
+        function updatePayablePaymentOptions() {
+            const select = document.getElementById('payablePaymentId');
+            select.innerHTML = '<option value="">-- 選択してください --</option>';
+            
+            payables.filter(p => p.paidAmount < p.amount).forEach(payable => {
+                const supplier = suppliers.find(s => s.id === payable.supplierId);
+                const balance = payable.amount - payable.paidAmount;
+                const option = document.createElement('option');
+                option.value = payable.id;
+                option.textContent = `${payable.id} - ${supplier ? supplier.name : '不明'} (残額: ¥${balance.toLocaleString()})`;
+                select.appendChild(option);
+            });
+        }
+
+    </script>
+<script defer="" src="./index_files/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;4edd5f8ec12a48cfa682ab8261b80a79&quot;,&quot;server_timing&quot;:{&quot;name&quot;:{&quot;cfCacheStatus&quot;:true,&quot;cfEdge&quot;:true,&quot;cfExtPri&quot;:true,&quot;cfL4&quot;:true,&quot;cfOrigin&quot;:true,&quot;cfSpeedBrain&quot;:true},&quot;location_startswith&quot;:null}}" crossorigin="anonymous"></script>
+
+</div></body></html>
